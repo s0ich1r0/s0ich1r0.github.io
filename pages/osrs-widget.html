@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSRS Stats Widget Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1410 100%);
+            font-family: 'Press Start 2P', Arial, sans-serif;
+            padding: 40px 20px;
+            color: #d4c5a9;
+        }
+
+        .generator-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #2a1810 0%, #1a0f0a 100%);
+            border: 4px solid #8B4513;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+        }
+
+        h1 {
+            color: #FFD700;
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0 #8B4513;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #DAA520;
+            font-size: 10px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #FFD700;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            background: #1a0f0a;
+            color: #FFD700;
+            border: 3px solid #654321;
+            border-radius: 4px;
+            font-family: 'Press Start 2P', Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .button {
+            width: 100%;
+            padding: 15px;
+            background: #654321;
+            color: #FFD700;
+            border: 3px solid #8B4513;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', Arial, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .button:hover {
+            background: #8B4513;
+            border-color: #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        .preview-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 3px solid #654321;
+            display: none;
+        }
+
+        .preview-section.active {
+            display: block;
+        }
+
+        .preview-label {
+            color: #FFD700;
+            font-size: 12px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .widget-preview {
+            background: linear-gradient(135deg, #2a1810 0%, #1a0f0a 100%);
+            border: 3px solid #8B4513;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .widget-header {
+            text-align: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #8B4513;
+        }
+
+        .player-name {
+            color: #FFD700;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 2px 2px 2px #000;
+            margin-bottom: 4px;
+        }
+
+        .stats-summary {
+            color: #DAA520;
+            font-size: 10px;
+            text-shadow: 1px 1px 1px #000;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .skill {
+            background: linear-gradient(135deg, #3a2820 0%, #2a1810 100%);
+            border: 2px solid #654321;
+            border-radius: 4px;
+            padding: 4px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .skill:hover {
+            border-color: #FFD700;
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .skill img {
+            width: 24px;
+            height: 24px;
+            display: block;
+            margin: 0 auto 2px auto;
+            image-rendering: pixelated;
+        }
+
+        .level {
+            color: #FFFF00;
+            font-size: 10px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+            margin: 2px 0;
+        }
+
+        .xp {
+            color: #DAA520;
+            font-size: 8px;
+            text-shadow: 1px 1px 1px #000;
+        }
+
+        .level-99 {
+            background: linear-gradient(135deg, #4a3820 0%, #3a2810 100%);
+            border-color: #FFD700;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+        }
+
+        .level-99 .level {
+            color: #00FF00;
+        }
+
+        .download-button {
+            background: #3a2820;
+            margin-top: 15px;
+        }
+
+        .download-button:hover {
+            background: #4a3820;
+        }
+
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #8B4513;
+            border-top-color: #FFD700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            text-align: center;
+            color: #FF6347;
+            font-size: 11px;
+            padding: 20px;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .feedback {
+            color: #00FF00;
+            font-size: 10px;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .feedback.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .skill-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="generator-container">
+        <h1>OSRS STATS WIDGET</h1>
+        <div class="subtitle">Generate your embeddable stats display</div>
+
+        <div class="input-group">
+            <label for="username-input">Enter RuneScape Username:</label>
+            <input type="text" id="username-input" placeholder="Limpin Cider" value="Limpin Cider">
+        </div>
+
+        <button class="button" onclick="generateWidget()">Generate Widget</button>
+
+        <div id="preview-section" class="preview-section">
+            <div class="preview-label">PREVIEW:</div>
+
+            <div id="widget-content" class="widget-preview">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+
+            <button class="button download-button" onclick="downloadWidget()">Download HTML File</button>
+            <div id="feedback" class="feedback">✓ Download started!</div>
+
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #654321;">
+                <div class="preview-label">HOW TO EMBED:</div>
+                <p style="color: #DAA520; font-size: 9px; line-height: 1.8; margin-bottom: 15px; text-align: center;">
+                    Upload the downloaded HTML file to your site, then use this iframe code:
+                </p>
+                <textarea readonly onclick="this.select()" style="width: 100%; height: 80px; padding: 10px; background: #1a0f0a; color: #00FF00; border: 2px solid #654321; border-radius: 4px; font-family: monospace; font-size: 10px; resize: vertical; line-height: 1.6;">&lt;iframe src="your-stats-file.html"
+        width="500"
+        height="300"
+        frameborder="0"
+        style="border: none; border-radius: 8px;"&gt;
+&lt;/iframe&gt;</textarea>
+                <p style="color: #8B8B8B; font-size: 8px; line-height: 1.6; margin-top: 10px; text-align: center;">
+                    Replace "your-stats-file.html" with the actual filename<br>
+                    Adjust width/height to fit your layout
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const PROXY_URL = 'https://osrs-widget.s0ich1r0s4t0h.workers.dev';
+        const skillIndices = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
+        const skillNames = ['Attack','Strength','Defence','Hitpoints','Ranged','Prayer','Magic','Cooking','Woodcutting','Fletching','Fishing','Firemaking','Crafting','Smithing','Mining','Herblore','Agility','Thieving','Slayer','Farming','Runecraft','Hunter','Construction','Sailing'];
+        let currentPlayer = '';
+        let currentData = null;
+
+        async function generateWidget() {
+            const username = document.getElementById('username-input').value.trim() || 'Limpin Cider';
+            currentPlayer = username;
+
+            document.getElementById('preview-section').classList.add('active');
+            const contentDiv = document.getElementById('widget-content');
+            contentDiv.innerHTML = '<div class="loading-spinner"><div class="spinner"></div></div>';
+
+            try {
+                const resp = await fetch(`${PROXY_URL}?player=${encodeURIComponent(username)}`);
+
+                if (!resp.ok) {
+                    throw new Error(`HTTP ${resp.status}`);
+                }
+
+                const data = await resp.json();
+                currentData = data;
+                displayWidget(contentDiv, data, username);
+
+            } catch (e) {
+                console.error('Failed to load stats:', e);
+                contentDiv.innerHTML = '<div class="error-message">❌ Failed to load stats<br>Player may not be on hiscores<br>or try again in a moment</div>';
+                currentData = null;
+            }
+        }
+
+        function displayWidget(container, data, username) {
+            const overall = data.skills[0];
+            const skills = data.skills;
+
+            // Calculate combat
+            const atk = skills[1].level;
+            const str = skills[2].level;
+            const def = skills[3].level;
+            const hp = skills[4].level;
+            const ranged = skills[5].level;
+            const pray = skills[6].level;
+            const magic = skills[7].level;
+
+            const base = 0.25 * (def + hp + Math.floor(pray / 2));
+            const meleeOff = 0.325 * (atk + str);
+            const rangeOff = 0.4875 * ranged;
+            const magicOff = 0.4875 * magic;
+            const combatLevel = Math.floor(base + Math.max(meleeOff, rangeOff, magicOff));
+
+            let html = `
+                <div class="widget-header">
+                    <div class="player-name">${username}</div>
+                    <div class="stats-summary">
+                        <span>Total: ${overall.level.toLocaleString()}</span> •
+                        <span>Combat: ${combatLevel}</span>
+                    </div>
+                </div>
+                <div class="skill-grid">
+            `;
+
+            skillIndices.forEach((idx, i) => {
+                const s = data.skills[idx];
+                const is99 = s.level >= 99 ? ' level-99' : '';
+                html += `
+                    <div class="skill${is99}" title="${skillNames[i]}">
+                        <img src="https://oldschool.runescape.wiki/images/${skillNames[i]}.png" alt="${skillNames[i]}">
+                        <div class="level">${s.level}</div>
+                        <div class="xp">${Number(s.xp).toLocaleString()}</div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function downloadWidget() {
+            if (!currentData) {
+                alert('Please generate a widget first!');
+                return;
+            }
+
+            const htmlContent = generateStandaloneHTML(currentPlayer, currentData);
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentPlayer.replace(/\s+/g, '_')}_osrs_stats.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            const feedback = document.getElementById('feedback');
+            feedback.classList.add('active');
+            setTimeout(() => feedback.classList.remove('active'), 3000);
+        }
+
+        function generateStandaloneHTML(username, data) {
+            const overall = data.skills[0];
+
+            let skillsHTML = '';
+            skillIndices.forEach((idx, i) => {
+                const s = data.skills[idx];
+                const is99 = s.level >= 99 ? ' osrs-skill-99' : '';
+                skillsHTML += `
+                    <div class="osrs-skill${is99}" title="${skillNames[i]}">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/${skillNames[i]}.png"
+                            alt="${skillNames[i]}">
+                        <div class="osrs-skill-level">${s.level}</div>
+                        <div class="osrs-skill-xp">${Number(s.xp).toLocaleString()}</div>
+                    </div>
+                `;
+            });
+
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${username} - OSRS Stats</title>
+
+<style>
+        #osrs-widget-root * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #osrs-widget-root {
+            background: transparent;
+            font-family: 'RuneScape', Arial, sans-serif;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .osrs-widget-container {
+            background: linear-gradient(135deg, #2a1810 0%, #1a0f0a 100%);
+            border: 0.3vh solid #8B4513;
+            border-radius: 1vh;
+            padding: 2vh 2vw;
+            box-shadow:
+                0 0 2vh rgba(0,0,0,0.8),
+                inset 0 0 3vh rgba(0,0,0,0.3);
+            max-width: 90vw;
+            margin: 0 auto;
+        }
+
+        .osrs-widget-header {
+            text-align: center;
+            margin-bottom: 1vh;
+            padding-bottom: 1vh;
+            border-bottom: 0.25vh solid #8B4513;
+        }
+
+        .osrs-player-name {
+            color: #FFD700;
+            font-size: 5.1vh;
+            font-weight: bold;
+            text-shadow: 0.3vh 0.3vh 0.3vh #000;
+        }
+
+        .osrs-stats-summary {
+            color: #DAA520;
+            font-size: 3.4vh;
+            text-shadow: 0.15vh 0.15vh 0.15vh #000;
+        }
+
+        #last-updated {
+            display: block;
+            font-size: 2.6vh;
+            color: #999;
+        }
+
+        .osrs-skill-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.8vh;
+            margin-top: 1vh;
+        }
+
+        .osrs-skill {
+            background: linear-gradient(135deg, #3a2820 0%, #2a1810 100%);
+            border: 0.25vh solid #654321;
+            border-radius: 0.6vh;
+            padding: 0.6vh 0.4vw;
+            text-align: center;
+        }
+
+        .osrs-skill-img {
+            width: 9vh;
+            height: 9vh;
+            display: block;
+            margin: 0 auto 0.3vh auto;
+            image-rendering: pixelated;
+        }
+
+        .osrs-skill-level {
+            color: #FFFF00;
+            font-size: 4.3vh;
+            font-weight: bold;
+        }
+
+        .osrs-skill-xp {
+            color: #DAA520;
+            font-size: 3vh;
+        }
+
+        .osrs-skill-99 {
+            background: linear-gradient(135deg, #4a3820 0%, #3a2810 100%);
+            border-color: #FFD700;
+            box-shadow: 0 0 1vh rgba(255,215,0,0.5);
+        }
+
+        .osrs-skill-99 .osrs-skill-level {
+            color: #00FF00;
+        }
+</style>
+</head>
+
+<body id="osrs-widget-root">
+<div class="osrs-widget-container">
+    <div class="osrs-widget-header">
+        <div class="osrs-player-name">${username}</div>
+        <div class="osrs-stats-summary">
+            Total: <span id="total-level">${overall.level.toLocaleString()}</span> •
+            Combat: <span id="combat-level">—</span>
+            <span id="last-updated"></span>
+        </div>
+    </div>
+
+    <div class="osrs-skill-grid" id="skill-grid">
+        ${skillsHTML}
+    </div>
+</div>
+
+<script>
+const PLAYER = ${JSON.stringify(username)};
+const PROXY_URL = 'https://osrs-widget.s0ich1r0s4t0h.workers.dev';
+const UPDATE_INTERVAL = 60 * 60 * 1000; // 1 hour
+const SKILL_INDICES = ${JSON.stringify(skillIndices)};
+
+async function updateStats() {
+    try {
+        const resp = await fetch(\`\${PROXY_URL}?player=\${encodeURIComponent(PLAYER)}\`);
+        if (!resp.ok) throw new Error('offline');
+
+        const data = await resp.json();
+        const skills = data.skills;
+
+        document.getElementById('total-level').textContent =
+            skills[0].level.toLocaleString();
+
+        const nodes = document.querySelectorAll('.osrs-skill');
+        nodes.forEach((node, i) => {
+            const s = skills[SKILL_INDICES[i]];
+            node.querySelector('.osrs-skill-level').textContent = s.level;
+            node.querySelector('.osrs-skill-xp').textContent =
+                Number(s.xp).toLocaleString();
+            node.classList.toggle('osrs-skill-99', s.level >= 99);
+        });
+
+        const atk = skills[1].level;
+        const str = skills[2].level;
+        const def = skills[3].level;
+        const hp  = skills[4].level;
+        const rng = skills[5].level;
+        const pray = skills[6].level;
+        const mag = skills[7].level;
+
+        const base = 0.25 * (def + hp + Math.floor(pray / 2));
+        const combat = Math.floor(
+            base + Math.max(
+                0.325 * (atk + str),
+                0.4875 * rng,
+                0.4875 * mag
+            )
+        );
+
+        document.getElementById('combat-level').textContent = combat;
+        document.getElementById('last-updated').textContent =
+            ' • ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+
+    } catch (err) {
+        console.error('Stats update failed:', err);
+        document.getElementById('last-updated').textContent = ' • offline';
+    }
+}
+
+updateStats();
+setInterval(updateStats, UPDATE_INTERVAL);
+<\/script>
+</body>
+</html>`;
+        }
+
+        document.getElementById('username-input').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') generateWidget();
+        });
+    </script>
+</body>
+</html>

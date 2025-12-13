@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soichiro's Sanctum</title>
+    <link rel="stylesheet" href="styles/styles.css" type="text/css">
+    <link rel="stylesheet" href="https://hotline-webring.club/hotline.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&family=Bitcount+Single:wght@100..900&family=Press+Start+2P&family=VT323&family=Yellowtail&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            width: 100%;
+            height: 100%;
+            height: 100vh;
+            z-index: -1;
+            background: transparent;
+            pointer-events: none;
+        }
+
+        .page-container {
+            width: 70vw;
+            width: 70%
+            max-width: 1200px;
+            min-width: 220px;
+            height: auto;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+<canvas id="particles-canvas"></canvas>
+
+
+
+<div class="page-container">
+    <header class="site-header">
+
+        <div class="header-marquee">
+        <marquee scrolldelay="100" behavior="scroll" direction="left">
+            <h1 class="site-title">
+
+
+                <span class="menu-star">⭐</span>✨ S0ich1r0's Sanctum ✨<span class="menu-star">⭐</span>
+
+            </h1>
+            </marquee>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside id="sidebar" class="sidebar">
+        <div class="menu-container">
+            <div class="epoch-label">Internet Time</div>
+                    <span id="mySwatchClock"></span>
+        </div>
+
+
+            <hr class="menu-hr">
+            <nav>
+                <ul class="menu-items">
+                    <a href="#" onclick="loadPage('home2.html'); return false;"><li class="menu-hoverable">Home</li></a>
+                    <a href="#" onclick="loadPage('links.html'); return false;"><li class="menu-hoverable">Cool Stuff</li></a>
+                    <a href="#" onclick="loadPage('osrs.html'); return false;"><li class="menu-hoverable">OSRS</li></a>
+                </ul>
+            </nav>
+
+            <hr class="menu-hr">
+
+            <center>
+                <div class="retro-music-player">
+                    <div class="youtube-embed-container">
+                        <div id="yt-player"></div>
+                    </div>
+
+                    <div class="player-title" id="player-title">-DnB Mix Loading...-</div>
+
+                    <div class="track-info">
+                        <span id="current-time">00:00</span> / <span id="duration">00:00</span>
+                    </div>
+                    <div class="progress-bar-container" id="progress-container">
+                        <div id="progress-bar" class="progress-bar-fill"></div>
+                    </div>
+
+                    <div class="buttons-volume">
+                        <input type="range" id="volume-slider" min="0" max="100" value="70">
+                    </div>
+                    <div class="player-button">
+                        <button class="control-btn" id="prev-btn">⏮</button>
+                        <button class="control-btn" id="play-pause-btn">▶</button>
+                        <button class="control-btn" id="next-btn">⏭</button>
+                    </div>
+                </div>
+
+                <hr class="menu-hr">
+
+
+                <div class="epoch-container">
+                    <div class="epoch-label">UNIX Epoch</div>
+                    <div class="epoch-time">
+                        <span id="epoch-seconds">0</span>
+                    </div>
+                    <div class="epoch-label">UTC</div>
+
+                </div>
+
+                <hr class="menu-hr">
+
+                <p>WEBRINGS<span class="menu-star">⭐</span></p>
+
+                <div class="webring-container">
+                    <a href="https://hotline-webring.club/s0ich1r0/previous" class="menu-link">&lt;&lt;&lt;</a>
+
+                    <span style="color: var(--gold-bright); margin: 0 12px; font-weight: bold;">hotline ☎ webring</span>
+
+                    <a href="https://hotline-webring.club/s0ich1r0/next" class="menu-link">&gt;&gt;&gt;</a>
+                    <br><br>
+                    <a href="https://hotlinewebring.club/" class="menu-link" target="_blank" style="font-size: 11px;">
+                        Hotline Webring
+                    </a>
+                </div>
+
+
+                <hr class="menu-hr">
+                <div class="menu-container">
+                    <p class="menu-star" style="font-size: 12px;">BANNERS</p>
+                    <p class="menu-star" style="font-size: 10px;">NO hotlinking PLEASE</p>
+                </div>
+                <div class="menu-container">
+                    <div class="badge-container">
+                        <img src="pics/soichiro.gif"
+                            alt="Site Badge"
+                            width="88" height="31"
+                            class="badge-img">
+
+
+
+                        <textarea class="badge-code" readonly onclick="this.select()">
+<a href="https://s0ich1r0.neocities.org/" target="_blank"><img src="https://YOURSITENAME.com" width="88" height="31" alt="Symbol of the Sanctum - Soichiro" style="image-rendering: pixelated; border: 2px solid #ffa500; box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);"></a>
+                        </textarea>
+
+                        <button class="badge-download"
+                                onclick="downloadBadge('pics/soichiro.gif', 'soichiro.gif')">
+                            Download
+                        </button>
+                    </div>
+                </div>
+                <div class="menu-container">
+                    <div class="badge-container">
+                        <img src="pics/stars.gif"
+                            alt="Site Badge"
+                            width="88" height="31"
+                            class="badge-img">
+
+
+
+                        <textarea class="badge-code" readonly onclick="this.select()">
+<a href="https://s0ich1r0.neocities.org/" target="_blank"><img src="https://YOURSITENAME.com" width="88" height="31" alt="Symbol of the Sanctum - Stars" style="image-rendering: pixelated; border: 2px solid #ffa500; box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);"></a>
+                        </textarea>
+
+                        <button class="badge-download"
+                                onclick="downloadBadge('pics/stars.gif', 'stars.gif')">
+                            Download
+                        </button>
+                    </div>
+                </div>
+                <div class="menu-container">
+                    <div class="badge-container">
+                        <img src="pics/sanctum.gif"
+                            alt="Site Badge"
+                            width="88" height="31"
+                            class="badge-img">
+
+
+
+                        <textarea class="badge-code" readonly onclick="this.select()">
+<a href="https://s0ich1r0.neocities.org/" target="_blank"><img src="https://YOURSITENAME.com" width="88" height="31" alt="Symbol of the Sanctum - Sanctum" style="image-rendering: pixelated; border: 2px solid #ffa500; box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);"></a>
+                        </textarea>
+
+                        <button class="badge-download"
+                                onclick="downloadBadge('pics/sanctum.gif', 'sanctum.gif')">
+                            Download
+                        </button>
+                    </div>
+                </div>
+                <div class="menu-container">
+                    <div class="badge-container">
+                        <img src="pics/orbit.gif"
+                            alt="Site Badge"
+                            width="88" height="31"
+                            class="badge-img">
+
+
+                        <textarea class="badge-code" readonly onclick="this.select()">
+<a href="https://s0ich1r0.neocities.org/" target="_blank"><img src="https://YOURSITENAME.com" width="88" height="31" alt="Symbol of the Sanctum - Orbit" style="image-rendering: pixelated; border: 2px solid #ffa500; box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);"></a>
+                        </textarea>
+
+                        <button class="badge-download"
+                                onclick="downloadBadge('pics/orbit.gif', 'orbit.gif')">
+                            Download
+                        </button>
+                    </div>
+                </div>
+
+                <div class="menu-container">
+                    <div class="badge-container">
+                        <img src="pics/plasma.gif"
+                            alt="Site Badge"
+                            width="88" height="31"
+                            class="badge-img">
+
+
+
+                        <textarea class="badge-code" readonly onclick="this.select()">
+<a href="https://s0ich1r0.neocities.org/" target="_blank"><img src="https://YOURUSERNAME.neocities.org/pics/plasma.gif" width="88" height="31" alt="Symbol of the Sanctum - Plasma" style="image-rendering: pixelated; border: 2px solid #ffa500; box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);"></a>
+                        </textarea>
+
+                        <button class="badge-download"
+                                onclick="downloadBadge('pics/plasma.gif', 'plasma.gif')">
+                            Download
+                        </button>
+                    </div>
+                </div>
+
+
+
+                <hr class="menu-hr">
+
+                <p><span class="menu-star">⭐</span></p>
+                <p style="font-size: 10px; line-height: 1.8;">
+                    Crafted by S0ICH1R0
+                    <br><br>
+                    <small></small>
+                </p>
+            </center>
+        </aside>
+
+        <main class="content">
+
+            <iframe id="content-frame" src="home2.html" frameborder="0"></iframe>
+
+        </main>
+    </div>
+
+
+
+    <footer class="site-footer">
+        <div class="footer-text">BANNERS</div>
+
+        <marquee scrolldelay="100" behavior="scroll" direction="right">
+
+            <a href="https://oldschool.runescape.com" target="_blank" title="Old School RuneScape">
+                <img src="pics/osrs.gif" width="88" height="31" alt="OSRS" style="image-rendering:pixelated;">
+            </a>
+
+            <a href="https://retrojcities.neocities.org" target="_blank"><img src="https://retrojcities.neocities.org/files/retrojcityYELLOW.png" width="88" height="31" alt="retrojcity yellow button"></a>
+
+            <a href="https://flonkie.nekoweb.org/" title="Flonkie's Café"><img src="https://flonkie.nekoweb.org/images/flonkiecafe.jpg" alt="Flonkie's Café"></a>
+
+            <a href="https://electric-tenshi.nekoweb.org/" target="_blank"><img src="https://file.garden/Z3nf4eZzZUtRPfhK/stuff/wvdtkw.gif" width="88" height="31" title="the miku-site of nekoweb... not the first but certainly one of them"></a>
+
+            <a href="https://www.freecodecamp.org/" target="_blank" title="FreeCodeCamp">
+                <img src="pics/FCC88x31.png" width="88" height="31" alt="Code" style="image-rendering:pixelated;">
+            </a>
+
+             <a href="http://openbooks.neocities.org"><img src="https://openbooks.neocities.org/img/88x31.gif" height="31" width="88" style="image-rendering:pixelated;"/></a>
+
+             <a href="https://chr0m0dynamic.nekoweb.org/index.html/"><img src="https://chr0m0dynamic.nekoweb.org/button.png"></a>
+
+              <a href="https://beansoupclub.neocities.org/" target="_blank"><img src="https://beansoupclub.neocities.org/buttonmain.gif" width="88" height="31"></a>
+
+              <a href="https://petrapixel.neocities.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/petracoding/petrapixel.neocities.org@latest/public/assets/img/linkback.gif" alt="petrapixel"></a>
+
+              <a href="eam-archives.neocities.org/" target="_blank"><img src="pics/eam-archives.gif" width="88" height="31" alt="eam-archives"></a>
+
+              <a href="rs-archives.neocities.org/" target="_blank"><img src="pics/headbanner.jpg" width="88" height="31" alt="rs-archives"></a>
+
+              <a href="rs-archives.neocities.org/" target="_blank"><img src="pics/vilemagus.png" width="88" height="31" alt="rs-archives"></a>
+
+              <a href="https://2001scape.neocities.org/Homepage" target="_blank"><img src="pics/2001scape.webp" width="88" height="31" alt="2001scape"></a>
+
+              <a href="https://kusev.neocities.org/" target="_blank"><img src="pics/kusev.png" width="88" height="31" alt="Saint Puppo!! So Cool!"></a>
+
+              <a href="https://moonfireclan.neocities.org/" target="_blank"><img src="pics/moonclan.jpg" width="88" height="31" alt="Moonfire Clan in Runescape"></a>
+
+              <a href="https://campfiretavern.neocities.org/" target="_blank"><img src="pics/campfire.png" width="88" height="31" alt="Campfire Tavern"></a>
+
+        </marquee>
+
+        <marquee scrolldelay="100" behavior="scroll" direction="left">
+
+            <a href="https://yesterweb.org/no-to-web3/" target="_blank"><img src="pics/noweb32.gif" width="88" height="31" alt="Say NO to WEB3!"></a>
+
+            <a href="https://vhs.neocities.org/" target="_blank"><img src="pics/VHSearch.jpg" width="88" height="31" alt="Neocities Search Engine!"></a>
+
+            <a href="https://cutie-club.nekoweb.org"><img src="https://files.catbox.moe/ir0mvg.gif" width="88" height="31"></a>
+
+            <a href="https://cadnomori.neocities.org/" target="_blank"><img src="pics/cadnonori.png" width="88" height="31" alt="cadnomori"></a>
+
+            <a target="_blank" href="https://webmasterwebring.netlify.app"><img src="https://file.garden/ZrZSgsrYfQXsO7QH/ww/btn.png" width="88" height="31"></a>
+
+            <a href="https://tinymagicalcat.neocities.org/" target="_blank"><img src="pics/tinymagicalcat.png" width="88" height="31" alt="tinymagicalcat"></a>
+
+            <a href="https://chamomile-tea.nekoweb.org/" target="_blank"><img src="pics/chamomile.png" width="88" height="31" alt="chamomile-tea"></a>
+
+            <a href="https://archive.org/" target="_blank"><img src="pics/internetarchive.gif" width="88" height="31" alt="Internet Archive"></a>
+
+            <a href="https://neocities.org/" target="_blank"><img src="pics/neocities.gif" width="88" height="31" alt="NEOCITIES!!"></a>
+
+            <a href="https://juneish.neocities.org/ring/beepbox/" target="_blank"><img src="pics/beepbox.png" width="88" height="31" alt="BeepBox Webring"></a>
+
+            <a href="https://eggmothsoup.neocities.org/" target="_blank"><img src="pics/eggmoth.png" width="88" height="31" alt="eggmoth"></a>
+
+            <a href="https://maliceinwonderland.nekoweb.org/" target="_blank"><img src="pics/miwbutton3.gif" width="88" height="31" alt="Malice in Wonderland"></a>
+
+            <a href="https://cobradile.neocities.org/index.en" target="_blank"><img src="pics/cobradile.png" width="88" height="31" alt="Cobra!'s Retro Room"></a>
+
+            <a href="https://riri.my/index" target="_blank"><img src="pics/rinasbutt.gif" width="88" height="31" alt="rinas space"></a>
+
+             <a href="https://bishoujopalace.neocities.org/" target="_blank"><img src="pics/bishoujo.gif" width="88" height="31" alt="bishoujo palace"></a>
+
+             <a href="https://archlinux.org/" target="_blank"><img src="pics/arch.png" width="88" height="31" alt="Arch Linux"></a>
+
+        </marquee>
+        <marquee scrolldelay="100" behavior="scroll" direction="right">
+
+            <a href="https://town.thecozy.cat/web-revival/freespeechwebring/"><img decoding="async" src="https://i.imgur.com/7QmM7ej.gif"></a>
+
+                <a href="https://forum.agoraroad.com/"><img alt="Agora Road" src="pics/agora.gif" width="88" height="31" ></a>
+
+                <a href="https://ylilauta.org/"><img alt="Ylilauta" src="pics/ylilauta.gif" width="88" height="31" ></a>
+
+                <a href="https://therift.vip/"><img alt="The Rift" src="pics/therift1.gif" width="88" height="31" ></a>
+
+                <a href="https://moekkis.neocities.org/"><img alt="moekkis!" src="pics/moekki.png" width="88" height="31" ></a>
+
+        </marquee>
+
+        <div class="right-vertical-marquee">
+            <marquee direction="up" scrollamount="2" class="vertical-marquee-track">
+
+
+            <a href="https://bungle.online/clique"  target="_blank"><img src="pics/s0i4ng3l.gif" alt="Angel resting upon a computer - S0ich1r0 REmix" style="width: 60px; height: 60px;"></a>
+
+
+                <a href="https://www.ginomegelati.de">
+                <img src="https://www.yatta-tempel.de/animierte/arkani.gif" style="width: 60px; height: 60px;" alt="Hiko" /></a>
+
+
+
+
+            </marquee>
+        </div>
+
+    </footer>
+</div>
+
+
+
+    <script src="scripts/script.js" defer></script>
+    <script src="scripts/link.js" defer></script>
+    <script>
+    var mySwatchClock = document.getElementById('mySwatchClock');
+    function updateSwatchClock() {
+        mySwatchClock.innerHTML = '@' + GetSwatchTime();
+    }
+    setInterval(updateSwatchClock, 864);
+    </script>
+
+
+</body>
+</html>

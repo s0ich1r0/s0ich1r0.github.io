@@ -1,0 +1,151 @@
+
+    <link rel="stylesheet" href="styles/styles.css" type="text/css">
+    <link rel="stylesheet" href="styles/toon.css" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&family=Bitcount+Single:wght@100..900&family=Press+Start+2P&family=VT323&family=Yellowtail&display=swap" rel="stylesheet">
+    <style>
+
+    </style>
+</head>
+<body>
+<main class="content">
+            <section class="content-frame">
+                <div class="toonami-header">
+                    <div class="toonami-logo">TOONAMI PROMOS</div>
+                    <div class="toonami-tagline">Classic Anime</div>
+                </div>
+
+                <div class="content-inner">
+                    <div class="video-grid" id="videoGrid">
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <iframe id="modalPlayer" class="modal-player" frameborder="0" allowfullscreen></iframe>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <p class="modal-description" id="modalDescription"></p>
+        </div>
+    </div>
+
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="scripts/script.js"></script>
+    <script>
+
+        const videos = [
+            {
+                title: "Outlaw Star",
+                thumbnail: "https://archive.org/download/adult-swim-action/adult-swim-action.thumbs/PROMO%20-%20Outlaw%20Star%20-%20Next%20%5BSlimD716%20Remaster%5D_000010.jpg",
+                embedUrl: "https://archive.org/download/adult-swim-action/PROMO%20-%20Outlaw%20Star%20-%20Opening%20%5BSlimD716%20Remaster%5D.mp4",
+                episodes: "26 Episodes",
+                description: "Gene Starwind and his crew travel through space in search of the legendary Galactic Leyline."
+            },
+            {
+                title: "Gundam Wing",
+                thumbnail: "https://archive.org/download/gw-toonami-promo-dvd/gw-toonami-promo-dvd.thumbs/gw-toonami-trailer-DVD_000087.jpg",
+                embedUrl: "https://archive.org/download/gw-toonami-promo-dvd/gw-toonami-trailer-DVD.mp4",
+                episodes: "49 Episodes",
+                description: "Five young pilots and their mobile suits fight for peace in the After Colony timeline."
+            },
+            {
+                title: "Gundam 08th MS Team",
+                thumbnail: "https://en.wikipedia.org/wiki/File:Mobile_Suit_Gundam_The_08th_MS_Team_Blu-ray_cover.jpg",
+                embedUrl: "https://youtu.be/7zcQFMQQ7vs?si=4EP84fQUbLrJS9C2",
+                episodes: "49 Episodes",
+                description: "Set during the One Year War of the Universal Century Timeline."
+            },
+            {
+                title: "Cowboy Bebop",
+                thumbnail: "https://archive.org/download/adult-swim-action/adult-swim-action.thumbs/PROMO%20-%20Cowboy%20Bebop%20-%20Jet%20Promo_000020.jpg",
+                embedUrl: "https://archive.org/download/adult-swim-action/PROMO%20-%20Cowboy%20Bebop%20-%20Long%20Promo.mp4",
+                episodes: "26 Episodes",
+                description: "A crew of bounty hunters travel through space in the year 2071 aboard the Bebop."
+            },
+            {
+                title: "Trigun",
+                thumbnail: "data:image/svg+xml,%3Csvg width='280' height='180' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%231a1410' width='280' height='180'/%3E%3Ctext x='140' y='90' text-anchor='middle' fill='%23d4af37' font-size='20'%3ETrigun%3C/text%3E%3C/svg%3E",
+                embedUrl: "https://archive.org/embed/YOUR_TRIGUN_ID",
+                episodes: "26 Episodes",
+                description: "Vash the Stampede is a gunslinger with a bounty on his head and a pacifist soul."
+            },
+            {
+                title: "Rurouni Kenshin",
+                thumbnail: "data:image/svg+xml,%3Csvg width='280' height='180' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%231a1410' width='280' height='180'/%3E%3Ctext x='140' y='90' text-anchor='middle' fill='%23d4af37' font-size='18'%3ERurouni Kenshin%3C/text%3E%3C/svg%3E",
+                embedUrl: "https://archive.org/embed/YOUR_KENSHIN_ID",
+                episodes: "95 Episodes",
+                description: "A former assassin wanders Japan with a reverse-blade sword during the Meiji period."
+            },
+            {
+                title: "Yu Yu Hakusho",
+                thumbnail: "https://archive.org/download/adult-swim-action/adult-swim-action.thumbs/PROMO%20-%20Yu%20Yu%20Hakusho%20-%20Saturday%20Promo_000001.jpg",
+                embedUrl: "https://archive.org/download/adult-swim-action/PROMO%20-%20Yu%20Yu%20Hakusho%20-%20Saturday%20Promo.mp4",
+                episodes: "112 Episodes",
+                description: "A teenage delinquent becomes a Spirit Detective investigating supernatural crimes."
+            }
+        ];
+
+        function generateVideoCards() {
+            const grid = document.getElementById('videoGrid');
+            grid.innerHTML = videos.map((video, index) => `
+                <div class="video-card" onclick="openVideo(${index})">
+                    <div style="position: relative;">
+                        <img src="${video.thumbnail}" alt="${video.title}" class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">${video.title}</h3>
+                        <div class="video-meta">${video.episodes}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openVideo(index) {
+            const video = videos[index];
+            const modal = document.getElementById('videoModal');
+            const player = document.getElementById('modalPlayer');
+            const title = document.getElementById('modalTitle');
+            const desc = document.getElementById('modalDescription');
+
+            player.src = video.embedUrl;
+            title.textContent = video.title;
+            desc.textContent = video.description;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            const player = document.getElementById('modalPlayer');
+
+            player.src = '';
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        document.getElementById('videoModal').addEventListener('click', (e) => {
+            if (e.target.id === 'videoModal') closeModal();
+        });
+
+        generateVideoCards();
+
+        function updateEpoch() {
+            const epoch = Math.floor(Date.now() / 1000);
+            document.getElementById('epoch-seconds').textContent = epoch;
+        }
+        setInterval(updateEpoch, 1000);
+        updateEpoch();
+    </script>
+</body>
+

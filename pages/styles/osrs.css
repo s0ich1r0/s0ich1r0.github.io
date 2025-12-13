@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background: url('https://oldschool.runescape.wiki/images/thumb/Old_School_RuneScape_world_map.png/1200px-Old_School_RuneScape_world_map.png?221b1')
+    center top
+    no-repeat
+    fixed;
+    background-size: cover;
+    font-family: 'Old Standard TT', serif;
+    color: #ffcc00;
+    image-rendering: pixelated;
+    height: 100vh;
+    width: 100vw;
+}
+
+.container {
+    max-width: 60vw;
+    margin: 3vh auto;
+    background: rgba(0,0,0,0.92);
+    border: 0.6vw ridge #8b6914;
+    box-shadow: 0 0 2vw #ffcc00;
+}
+
+header {
+    background: linear-gradient(#2d1810, #1a0f08);
+    padding: 2vh;
+    text-align: center;
+    border-bottom: 0.4vw double #ffcc00;
+}
+
+h1 {
+    margin: 0;
+    font-size: 4.2vh;
+    color: #ffcc00;
+    text-shadow: 0.3vh 0.3vh 0 #000;
+    letter-spacing: 0.3vw;
+}
+
+.subtitle {
+    font-size: 1.8vh;
+    color: #ffd700;
+}
+
+.content {
+    padding: 2.5vh;
+}
+
+.stats-box {
+    background: #1a0f08;
+    border: 0.4vw solid #8b6914;
+    padding: 2vh;
+    margin: 2vh 0;
+    position: relative;
+}
+
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8vw, 1fr));
+    gap: 1vw;
+}
+
+.skill {
+    background: #2d1810;
+    border: 0.2vw ridge #ffcc00;
+    padding: 0.6vh;
+    text-align: center;
+    font-size: 1.2vh;
+    font-weight: bold;
+}
+
+.skill img {
+    width: 2.8vh;
+    height: 2.8vh;
+    image-rendering: pixelated;
+    display: block;
+    margin: 0 auto 0.4vh;
+}
+
+.level {
+    font-size: 1.8vh;
+    color: #00ff00;
+    margin: 0.2vh 0;
+}
+
+.xp {
+    font-size: 1.1vh;
+    color: #ffd700;
+}
+
+.button {
+    display: inline-block;
+    background: #8b6914;
+    color: #ffcc00;
+    padding: 1vh 2.4vw;
+    margin: 0.8vh 0.8vw;
+    border: 0.3vw ridge #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.5vh;
+}
+
+.button:hover {
+    background: #b8860b;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5vh;
+    background: #1a0f08;
+    border-top: 0.4vw solid #8b6914;
+    font-size: 1.3vh;
+}
+
+.photo-gallery {
+    margin: 3vh 0;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1vw;
+    justify-items: center;
+}
+
+.gallery-item img {
+    width: 100%;
+    cursor: pointer;
+    border: 0.2vw solid #ffcc00;
+    image-rendering: pixelated;
+}
+
+.music-player {
+    position: fixed;
+    bottom: 1.2vh;
+    right: 2vw;
+    background: #1a0f08;
+    border: 0.3vw ridge #8b6914;
+    padding: 0.8vh 1.2vw;
+    border-radius: 0.4vh;
+    box-shadow: 0 0 1.5vh rgba(255, 204, 0, 0.6);
+    z-index: 10;
+}
+
+.music-player audio {
+    width: 12vw;
+    height: 3.6vh;
+    outline: none;
+}
+
+.music-player audio::-webkit-media-controls-panel {
+    background-color: #2d1810;
+    border: 0.2vw ridge #ffcc00;
+}
+
+.music-player audio::-webkit-media-controls-play-button,
+.music-player audio::-webkit-media-controls-volume-slider {
+filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(20deg);
+}
+
+.music-title {
+font-size: 1.8vh;
+text-align: center;
+margin-bottom: 0.4vh;
+color: #ffd700;
+text-shadow: 0.1vh 0.1vh 0 #000;
+}
+
+.player-input {
+text-align: center;
+margin-bottom: 2vh;
+}
+
+#player-name {
+background: #111;
+border: 0.3vw solid #d4af37;
+color: #d4af37;
+padding: 1vh 1.5vw;
+font-size: 2vh;
+text-align: center;
+width: 25vw;
+text-transform: capitalize;
+}
+
+#load-btn {
+margin-left: 1vw;
+background: #1e140c;
+border: 0.3vw solid #d4af37;
+color: #d4af37;
+padding: 1vh 2vw;
+cursor: pointer;
+font-size: 2vh;
+}
+
+#load-btn:hover {
+background: #2c1c10;
+}
+
+#last-updated {
+font-size: 0.85em;
+color: #999;
+}
+
+.loader-overlay {
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(43, 24, 16, 0.95);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 10;
+border-radius: 0.8vh;
+}
+
+.osrs-spinner {
+width: 12vh;
+height: 12vh;
+filter: drop-shadow(0 0 1vh rgba(255, 215, 0, 0.6));
+}

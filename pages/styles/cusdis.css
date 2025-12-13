@@ -1,0 +1,141 @@
+:root {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #1a1410;
+    --bg-tertiary: #2a1f1a;
+    --stone: #3a2820;
+    --gold: #d4af37;
+    --gold-bright: #ffa500;
+    --text: #d4c5a9;
+    --text-dim: #a89378;
+}
+
+body {
+    background: var(--bg-primary) !important;
+    color: var(--text) !important;
+    font-family: 'Press Start 2P', cursive !important;
+    min-height: 100vh !important;
+}
+
+/* === IFRAME CONTAINER === */
+#cusdis_thread {
+max-width: 900px !important;
+margin: 30px auto !important;
+padding: 20px !important;
+background: var(--bg-primary) !important;
+border: 8px double var(--gold) !important;
+box-shadow: 0 0 40px var(--gold-bright), inset 0 0 30px rgba(0,0,0,0.8) !important;
+}
+
+#cusdis_thread iframe {
+width: 100% !important;
+min-height: 90vh !important;
+border: none !important;
+}
+
+/* === NUCLEAR OPTION: TARGET EVERY POSSIBLE GREY BACKGROUND === */
+#cusdis_thread div,
+#cusdis_thread article,
+#cusdis_thread section,
+#cusdis_thread [class],
+#cusdis_thread [class*="comment"],
+#cusdis_thread [class*="card"],
+#cusdis_thread [class*="item"],
+#cusdis_thread [class*="box"],
+#cusdis_thread [data-comment],
+#cusdis_thread [data-id] {
+background: var(--stone) !important;
+background-color: var(--stone) !important;
+}
+
+/* === SPECIFIC COMMENT BOXES === */
+#cusdis_thread [class*="comment"],
+#cusdis_thread article,
+#cusdis_thread [data-id],
+#cusdis_thread .comment,
+#cusdis_thread .cusdis-comment {
+background: var(--stone) !important;
+background-color: var(--stone) !important;
+border: 6px solid var(--gold) !important;
+box-shadow: 0 0 25px rgba(255,165,0,0.5) !important;
+padding: 24px !important;
+margin: 30px 0 !important;
+border-radius: 0 !important;
+min-height: 180px !important;
+}
+
+/* === FORM ELEMENTS === */
+#cusdis_thread input,
+#cusdis_thread textarea {
+background: var(--bg-secondary) !important;
+background-color: var(--bg-secondary) !important;
+color: var(--text) !important;
+border: 5px solid var(--gold) !important;
+padding: 16px !important;
+font-family: 'Press Start 2P', cursive !important;
+font-size: 13px !important;
+}
+
+/* === BUTTONS === */
+#cusdis_thread button {
+background: var(--stone) !important;
+background-color: var(--stone) !important;
+color: var(--gold-bright) !important;
+border: 6px double var(--gold) !important;
+padding: 16px 32px !important;
+font-family: 'Press Start 2P', cursive !important;
+font-size: 14px !important;
+cursor: pointer !important;
+text-transform: uppercase !important;
+}
+
+#cusdis_thread button:hover {
+background: var(--gold) !important;
+background-color: var(--gold) !important;
+color: var(--bg-primary) !important;
+box-shadow: 0 0 40px var(--gold-bright) !important;
+}
+
+/* === TEXT COLORS === */
+#cusdis_thread * {
+color: var(--text) !important;
+font-family: 'Press Start 2P', cursive !important;
+}
+
+#cusdis_thread strong,
+#cusdis_thread [class*="author"],
+#cusdis_thread [class*="name"] {
+color: var(--gold-bright) !important;
+text-shadow: 0 0 12px var(--gold-bright) !important;
+}
+
+#cusdis_thread time,
+#cusdis_thread [class*="date"],
+#cusdis_thread [class*="time"] {
+color: var(--text-dim) !important;
+font-size: 10px !important;
+}
+
+/* === LINKS === */
+#cusdis_thread a {
+color: var(--gold) !important;
+text-decoration: underline !important;
+}
+
+#cusdis_thread a:hover {
+color: var(--gold-bright) !important;
+text-shadow: 0 0 8px var(--gold-bright) !important;
+}
+
+/* === HEADER === */
+#cusdis_thread h1,
+#cusdis_thread h2,
+#cusdis_thread h3,
+#cusdis_thread h4 {
+background: linear-gradient(135deg, var(--stone), var(--bg-primary)) !important;
+background-color: var(--stone) !important;
+border-bottom: 8px double var(--gold) !important;
+padding: 24px !important;
+color: var(--gold-bright) !important;
+text-shadow: 0 0 20px var(--gold-bright) !important;
+text-transform: uppercase !important;
+}

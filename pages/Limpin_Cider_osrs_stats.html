@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Limpin Cider - OSRS Stats</title>
+
+        <style>
+        #osrs-widget-root * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #osrs-widget-root {
+            background: transparent;
+            font-family: 'RuneScape', Arial, sans-serif;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .osrs-widget-container {
+            background: linear-gradient(135deg, #2a1810 0%, #1a0f0a 100%);
+            border: 0.3vh solid #8B4513;
+            border-radius: 1vh;
+            padding: 2vh 2vw;
+            box-shadow:
+                0 0 2vh rgba(0,0,0,0.8),
+                inset 0 0 3vh rgba(0,0,0,0.3);
+            max-width: 90vw;
+            margin: 0 auto;
+        }
+
+        .osrs-widget-header {
+            text-align: center;
+            margin-bottom: 1vh;
+            padding-bottom: 1vh;
+            border-bottom: 0.25vh solid #8B4513;
+        }
+
+        .osrs-player-name {
+            color: #FFD700;
+            font-size: 5.1vh;
+            font-weight: bold;
+            text-shadow: 0.3vh 0.3vh 0.3vh #000;
+        }
+
+        .osrs-stats-summary {
+            color: #DAA520;
+            font-size: 3.4vh;
+            text-shadow: 0.15vh 0.15vh 0.15vh #000;
+        }
+
+        #last-updated {
+            display: block;
+            font-size: 2.6vh;
+            color: #999;
+        }
+
+        .osrs-skill-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.8vh;
+            margin-top: 1vh;
+        }
+
+        .osrs-skill {
+            background: linear-gradient(135deg, #3a2820 0%, #2a1810 100%);
+            border: 0.25vh solid #654321;
+            border-radius: 0.6vh;
+            padding: 0.6vh 0.4vw;
+            text-align: center;
+        }
+
+        .osrs-skill-img {
+            width: 9vh;
+            height: 9vh;
+            display: block;
+            margin: 0 auto 0.3vh auto;
+            image-rendering: pixelated;
+        }
+
+        .osrs-skill-level {
+            color: #FFFF00;
+            font-size: 4.3vh;
+            font-weight: bold;
+        }
+
+        .osrs-skill-xp {
+            color: #DAA520;
+            font-size: 3vh;
+        }
+
+        .osrs-skill-99 {
+            background: linear-gradient(135deg, #4a3820 0%, #3a2810 100%);
+            border-color: #FFD700;
+            box-shadow: 0 0 1vh rgba(255,215,0,0.5);
+        }
+
+        .osrs-skill-99 .osrs-skill-level {
+            color: #00FF00;
+        }
+        </style>
+        </head>
+
+        <body id="osrs-widget-root">
+        <div class="osrs-widget-container">
+            <div class="osrs-widget-header">
+                <div class="osrs-player-name">Limpin Cider</div>
+                <div class="osrs-stats-summary">
+                    Total: <span id="total-level">1,363</span> •
+                    Combat: <span id="combat-level">–</span>
+                    <span id="last-updated"></span>
+                </div>
+            </div>
+
+            <div class="osrs-skill-grid" id="skill-grid">
+
+                    <div class="osrs-skill" title="Attack">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Attack.png"
+                            alt="Attack">
+                        <div class="osrs-skill-level">66</div>
+                        <div class="osrs-skill-xp">536,119</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Strength">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Strength.png"
+                            alt="Strength">
+                        <div class="osrs-skill-level">60</div>
+                        <div class="osrs-skill-xp">287,427</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Defence">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Defence.png"
+                            alt="Defence">
+                        <div class="osrs-skill-level">63</div>
+                        <div class="osrs-skill-xp">369,626</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Hitpoints">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Hitpoints.png"
+                            alt="Hitpoints">
+                        <div class="osrs-skill-level">68</div>
+                        <div class="osrs-skill-xp">638,213</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Ranged">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Ranged.png"
+                            alt="Ranged">
+                        <div class="osrs-skill-level">41</div>
+                        <div class="osrs-skill-xp">43,738</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Prayer">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Prayer.png"
+                            alt="Prayer">
+                        <div class="osrs-skill-level">48</div>
+                        <div class="osrs-skill-xp">87,039</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Magic">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Magic.png"
+                            alt="Magic">
+                        <div class="osrs-skill-level">74</div>
+                        <div class="osrs-skill-xp">1,172,980</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Cooking">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Cooking.png"
+                            alt="Cooking">
+                        <div class="osrs-skill-level">55</div>
+                        <div class="osrs-skill-xp">179,558</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Woodcutting">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Woodcutting.png"
+                            alt="Woodcutting">
+                        <div class="osrs-skill-level">75</div>
+                        <div class="osrs-skill-xp">1,238,184</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Fletching">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Fletching.png"
+                            alt="Fletching">
+                        <div class="osrs-skill-level">71</div>
+                        <div class="osrs-skill-xp">856,224</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Fishing">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Fishing.png"
+                            alt="Fishing">
+                        <div class="osrs-skill-level">59</div>
+                        <div class="osrs-skill-xp">250,582</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Firemaking">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Firemaking.png"
+                            alt="Firemaking">
+                        <div class="osrs-skill-level">72</div>
+                        <div class="osrs-skill-xp">951,670</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Crafting">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Crafting.png"
+                            alt="Crafting">
+                        <div class="osrs-skill-level">55</div>
+                        <div class="osrs-skill-xp">179,498</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Smithing">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Smithing.png"
+                            alt="Smithing">
+                        <div class="osrs-skill-level">57</div>
+                        <div class="osrs-skill-xp">219,779</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Mining">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Mining.png"
+                            alt="Mining">
+                        <div class="osrs-skill-level">66</div>
+                        <div class="osrs-skill-xp">529,330</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Herblore">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Herblore.png"
+                            alt="Herblore">
+                        <div class="osrs-skill-level">25</div>
+                        <div class="osrs-skill-xp">8,112</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Agility">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Agility.png"
+                            alt="Agility">
+                        <div class="osrs-skill-level">42</div>
+                        <div class="osrs-skill-xp">48,799</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Thieving">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Thieving.png"
+                            alt="Thieving">
+                        <div class="osrs-skill-level">42</div>
+                        <div class="osrs-skill-xp">46,306</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Slayer">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Slayer.png"
+                            alt="Slayer">
+                        <div class="osrs-skill-level">57</div>
+                        <div class="osrs-skill-xp">212,392</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Farming">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Farming.png"
+                            alt="Farming">
+                        <div class="osrs-skill-level">39</div>
+                        <div class="osrs-skill-xp">35,865</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Runecraft">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Runecraft.png"
+                            alt="Runecraft">
+                        <div class="osrs-skill-level">63</div>
+                        <div class="osrs-skill-xp">372,227</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Hunter">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Hunter.png"
+                            alt="Hunter">
+                        <div class="osrs-skill-level">45</div>
+                        <div class="osrs-skill-xp">61,523</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Construction">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Construction.png"
+                            alt="Construction">
+                        <div class="osrs-skill-level">52</div>
+                        <div class="osrs-skill-xp">129,968</div>
+                    </div>
+
+                    <div class="osrs-skill" title="Sailing">
+                        <img class="osrs-skill-img"
+                            src="https://oldschool.runescape.wiki/images/Sailing.png"
+                            alt="Sailing">
+                        <div class="osrs-skill-level">68</div>
+                        <div class="osrs-skill-xp">657,059</div>
+                    </div>
+
+            </div>
+        </div>
+
+        <script>
+        const PLAYER = "Limpin Cider";
+        const UPDATE_INTERVAL = 60 * 60 * 1000;
+        const SKILL_INDICES = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
+
+        async function updateStats() {
+            try {
+                const proxy =
+                    'https://api.allorigins.win/raw?url=' +
+                    encodeURIComponent(
+                        'https://secure.runescape.com/m=hiscore_oldschool/index_lite.json?player=' + PLAYER
+                    );
+
+                const resp = await fetch(proxy);
+                if (!resp.ok) throw new Error('offline');
+
+                const data = await resp.json();
+                const skills = data.skills;
+
+                document.getElementById('total-level').textContent =
+                    skills[0].level.toLocaleString();
+
+                const nodes = document.querySelectorAll('.osrs-skill');
+                nodes.forEach((node, i) => {
+                    const s = skills[SKILL_INDICES[i]];
+                    node.querySelector('.osrs-skill-level').textContent = s.level;
+                    node.querySelector('.osrs-skill-xp').textContent =
+                        Number(s.xp).toLocaleString();
+                    node.classList.toggle('osrs-skill-99', s.level >= 99);
+                });
+
+                const atk = skills[1].level;
+                const str = skills[2].level;
+                const def = skills[3].level;
+                const hp  = skills[4].level;
+                const rng = skills[5].level;
+                const pray = skills[6].level;
+                const mag = skills[7].level;
+
+                const base = 0.25 * (def + hp + Math.floor(pray / 2));
+                const combat = Math.floor(
+                    base + Math.max(
+                        0.325 * (atk + str),
+                        0.4875 * rng,
+                        0.4875 * mag
+                    )
+                );
+
+                document.getElementById('combat-level').textContent = combat;
+                document.getElementById('last-updated').textContent =
+                    ' • ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+
+            } catch {
+                document.getElementById('last-updated').textContent = ' • offline';
+            }
+        }
+
+        updateStats();
+        setInterval(updateStats, UPDATE_INTERVAL);
+        </script>
+        </body>
+        </html>

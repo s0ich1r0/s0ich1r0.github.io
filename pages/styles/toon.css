@@ -1,0 +1,186 @@
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .video-card {
+            background: linear-gradient(135deg, #1a1410 0%, #2d2318 100%);
+            border: 2px solid var(--gold-bright, #d4af37);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            border-color: #ffd700;
+        }
+
+        .video-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .video-card:hover::before {
+            opacity: 1;
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-info {
+            padding: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 12px;
+            color: var(--gold-bright, #d4af37);
+            margin: 0 0 8px 0;
+            line-height: 1.4;
+        }
+
+        .video-meta {
+            font-family: 'VT323', monospace;
+            font-size: 14px;
+            color: #c9a961;
+            margin: 5px 0;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: var(--gold-bright, #d4af37);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+            pointer-events: none;
+        }
+
+        .video-card:hover .play-icon {
+            opacity: 1;
+        }
+
+
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .video-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            width: 90%;
+            height: 70%;
+            max-width: 1200px;
+            background: #1a1410;
+            border: 3px solid var(--gold-bright, #d4af37);
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 32px;
+            color: var(--gold-bright, #d4af37);
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px 15px;
+            font-family: 'Press Start 2P', monospace;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+
+        .modal-player {
+            width: 100%;
+            height: 80%;
+            aspect-ratio: 16/9;
+            background: #000;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 16px;
+            color: var(--gold-bright, #d4af37);
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .modal-description {
+            font-family: 'VT323', monospace;
+            font-size: 18px;
+            color: #c9a961;
+            line-height: 1.5;
+        }
+
+        .toonami-header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #2d2318 0%, #1a1410 100%);
+            border: 2px solid var(--gold-bright, #d4af37);
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .toonami-logo {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 24px;
+            color: var(--gold-bright, #d4af37);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            margin-bottom: 10px;
+        }
+
+        .toonami-tagline {
+            font-family: 'VT323', monospace;
+            font-size: 18px;
+            color: #c9a961;
+        }

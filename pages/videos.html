@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soichiro's Sanctum</title>
+    <link rel="stylesheet" href="styles/styles.css" type="text/css">
+    <link rel="stylesheet" href="https://hotline-webring.club/hotline.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&family=Bitcount+Single:wght@100..900&family=Press+Start+2P&family=VT323&family=Yellowtail&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<main class="content">
+            <div class="beepbox-container">
+                            <span class="beepbox-label">A BeepBox song I made!</span>
+                            <iframe class="beepbox-iframe" src="https://www.beepbox.co/#9n31s2k0l00e0at2za7g0fj07r1i0o432T1v1u36f0qwx10n511d08A0F0B0Q06e0Pb330E3bi617626T5v1ua6f10i8q8141d23HYr901i8ah00000h0E0T5v1uggf10s6qo1431d22HZzi99980000000h0E0T3v1uf5f0qwx10n511d08S1jsSIzsSrIAASJJE1b6b4h8zd5hg000h4w0i8y00014h4h4h4000cO4h55pM000p23AkQuj3bB3bFcKAOZ8OWieQzAie48WPbS3bEcKwOW3bQzbEcKwOW3b5fvH48YLGpvjI12efkRfzZ7e90FE_B5555551QU2Phy5ydd6hjBkhV17BihV5elh7A4uMhQ4t17ghQkkkkkkkrNBQ6ngpt1BX1vhopt9vhipuIpt1BQ5Z1vghQTjBAQpx7ghQkkkmqcw8hFEOas1EzO2faAzOasGyf88Z0OW3bEcKwOM" allowfullscreen></iframe>
+                        </div>
+                        It is not very good but that is not what matters, i had a ball making it. it reminds me of Pokemon games on the Gameboy
+                    </li>
+            </div>
+
+            <br>
+
+            <section id="yt-channel">
+                <h1>Some of My Music and stuff</h1>
+                <div id="yt-video-grid" class="yt-grid"></div>
+            </section>
+        </main>
+
+
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+const CHANNEL_ID = "UCEn8ECASM-_Yw4eWgmUCs9Q";
+const RSS_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
+const API_PROXY = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+
+async function loadYouTubeChannel() {
+    const container = document.getElementById("yt-video-grid");
+
+    try {
+        const response = await fetch(API_PROXY);
+        const data = await response.json();
+        const videos = data.items;
+
+        videos.forEach(video => {
+            const vidId = video.guid.replace("yt:video:", "");
+            container.innerHTML += `
+                <div class="yt-card">
+                    <iframe class="yt-iframe"
+                        src="https://www.youtube.com/embed/${vidId}"
+                        allow="encrypted-media;
+                        allowfullscreen>
+                    </iframe>
+                    <div class="yt-info">
+                        <div class="yt-title">${video.title}</div>
+                        <div class="yt-meta">${new Date(video.pubDate).toLocaleDateString()}</div>
+                    </div>
+                </div>
+            `;
+        });
+
+    } catch (err) {
+        console.error("YouTube load error:", err);
+        container.innerHTML = "<p>Failed to load videos.</p>";
+    }
+}
+
+loadYouTubeChannel();
+
+</script>
+
+
+    <script src="scripts/script.js"></script>
+</body>
+</html>

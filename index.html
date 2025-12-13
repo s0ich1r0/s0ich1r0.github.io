@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>◈ SOICHIRO'S SANCTUM</title>
+    <meta name="description" content="S0ich1r0's Sanctum">
+        <link rel="stylesheet" href="pages/styles/styles.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #1a1410;
+            --bg-tertiary: #2a1f1a;
+            --stone: #3a2820;
+            --gold: #d4af37;
+            --gold-bright: #ffa500;
+            --text: #d4c5a9;
+            --text-dim: #a89378;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg-primary);
+            color: var(--text);
+            font-family: 'Press Start 2P', 'Courier New', monospace;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .grid-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image:
+                linear-gradient(rgba(212,175,55,0.1) 0.12vh, transparent 0.12vh),
+                linear-gradient(90deg, rgba(212,175,55,0.1) 0.12vw, transparent 0.12vw);
+            background-size: 5vw 5vh;
+            animation: gridmove 120s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gridmove {
+            0% { background-position: 0 0; }
+            100% { background-position: 10vw 10vh; }
+        }
+
+        .entrance {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+
+            padding: 8vh 6vw;
+
+        }
+
+        h1 {
+            font-size: clamp(2rem, 6vw, 5rem);
+            margin-bottom: 2vh;
+            color: var(--gold-bright);
+            text-shadow:
+                0 0 3vh var(--gold-bright),
+                0.5vw 0.5vw 0 var(--stone);
+            letter-spacing: 1vw;
+            animation: flicker 4s infinite alternate;
+        }
+
+        .enter-btn {
+            margin-top: 5vh;
+            display: inline-block;
+            padding: 2vh 4vw;
+            background: var(--stone);
+            border: 0.4vh solid var(--gold);
+            color: var(--gold-bright);
+            font-family: 'Press Start 2P', monospace;
+            font-size: clamp(0.8rem, 2vw, 1.5rem);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 3vh rgba(212,175,55,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enter-btn:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+            box-shadow: 0 0 5vh var(--gold-bright);
+            transform: translateY(-0.6vh);
+        }
+
+        .enter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.7s;
+        }
+
+        .enter-btn:hover::before {
+            left: 100%;
+        }
+
+        .scanlines {
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0,0,0,0) 0vh,
+                rgba(0,0,0,0.25) 0.2vh,
+                rgba(0,0,0,0) 0.4vh
+            );
+            pointer-events: none;
+            z-index: 5;
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+
+        @keyframes flicker {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.94; }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .entrance {
+                padding: 6vh 6vw;
+                margin: 4vh 4vw;
+            }
+
+        }
+
+        .first-webring-container {
+            margin: 2vh;
+            text-align: center;
+            font-family: 'Press Start 2P', monospace;
+            z-index: 10;
+            position: relative;
+            font-size: 0.8vw;
+        }
+
+        .first-menu-link {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .frist-menu-link:hover {
+            color: var(--gold-bright);
+        }
+
+        .first-webring-title {
+            font-size: 1vw !important;
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:transparent;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<canvas id="particles-canvas"></canvas>
+
+    <div class="grid-bg"></div>
+    <div class="scanlines"></div>
+
+
+    <div class="entrance">
+        <h1>S0ICH1R0'S<br>SANCTUM</h1>
+        <a href="/pages/home.html" class="enter-btn"> ENTER </a>
+    </div>
+
+    <div class="first-webring-container">
+        <a href="https://hotline-webring.club/s0ich1r0/previous" class="first-menu-link">&lt;&lt;&lt;</a>
+        <span><a href="https://hotline-webring.club/" class="first-menu-link first-webring-title" target="_blank">hotline ☎ webring</a></span>
+        <a href="https://hotline-webring.club/s0ich1r0/next" class="first-menu-link">&gt;&gt;&gt;</a>
+    </div>
+
+
+    <script src="pages/scripts/script.js"></script>
+
+</body>
+</html>
