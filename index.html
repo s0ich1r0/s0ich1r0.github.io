@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>◈ SOICHIRO'S SANCTUM</title>
     <meta name="description" content="S0ich1r0's Sanctum">
-        <link rel="stylesheet" href="pages/styles/styles.css" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -28,8 +27,6 @@
             font-family: 'Press Start 2P', 'Courier New', monospace;
             overflow: hidden;
             display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
         }
 
@@ -50,35 +47,46 @@
             100% { background-position: 10vw 10vh; }
         }
 
-        .entrance {
-            text-align: center;
+        .main-container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
             z-index: 10;
             position: relative;
+        }
 
-            padding: 8vh 6vw;
+        .entrance-section {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4vh 3vw;
+        }
 
+        .entrance {
+            text-align: center;
         }
 
         h1 {
-            font-size: clamp(2rem, 6vw, 5rem);
+            font-size: clamp(2rem, 4vw, 4rem);
             margin-bottom: 2vh;
             color: var(--gold-bright);
             text-shadow:
                 0 0 3vh var(--gold-bright),
                 0.5vw 0.5vw 0 var(--stone);
-            letter-spacing: 1vw;
+            letter-spacing: 0.5vw;
             animation: flicker 4s infinite alternate;
         }
 
         .enter-btn {
-            margin-top: 5vh;
+            margin-top: 4vh;
             display: inline-block;
-            padding: 2vh 4vw;
+            padding: 2vh 3vw;
             background: var(--stone);
             border: 0.4vh solid var(--gold);
             color: var(--gold-bright);
             font-family: 'Press Start 2P', monospace;
-            font-size: clamp(0.8rem, 2vw, 1.5rem);
+            font-size: clamp(0.7rem, 1.5vw, 1.2rem);
             text-decoration: none;
             cursor: pointer;
             transition: all 0.3s;
@@ -107,6 +115,90 @@
             left: 100%;
         }
 
+        .webring-section {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4vh 2vw;
+            border-left: 0.3vh solid var(--gold);
+        }
+
+        .webring-container {
+            width: 100%;
+            max-width: 600px;
+            height: 80vh;
+            overflow-y: auto;
+            padding: 2vh 2vw;
+            background: rgba(42, 31, 26, 0.3);
+            border: 0.3vh solid var(--stone);
+            border-radius: 1vh;
+            box-shadow: inset 0 0 3vh rgba(0,0,0,0.5);
+        }
+
+        .webring-container::-webkit-scrollbar {
+            width: 1vw;
+        }
+
+        .webring-container::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 0.5vh;
+        }
+
+        .webring-container::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 0.5vh;
+            border: 0.2vh solid var(--bg-secondary);
+        }
+
+        .webring-container::-webkit-scrollbar-thumb:hover {
+            background: var(--gold-bright);
+        }
+
+        .webring-item {
+            margin-bottom: 4vh;
+            padding: 2vh;
+            background: rgba(26, 20, 16, 0.6);
+            border: 0.2vh solid var(--gold);
+            border-radius: 0.5vh;
+            text-align: center;
+        }
+
+        .webring-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .webring-title {
+            font-size: clamp(0.7rem, 1.2vw, 1rem);
+            color: var(--gold-bright);
+            margin-bottom: 2vh;
+            display: block;
+        }
+
+        .webring-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2vw;
+            flex-wrap: wrap;
+        }
+
+        .webring-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: clamp(0.6rem, 1vw, 0.9rem);
+            transition: all 0.3s;
+            padding: 1vh 1vw;
+        }
+
+        .webring-link:hover {
+            color: var(--gold-bright);
+            text-shadow: 0 0 1vh var(--gold-bright);
+        }
+
+
+
         .scanlines {
             position: absolute;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -131,39 +223,33 @@
             50% { opacity: 0.94; }
         }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        @media (max-width: 768px) {
-            .entrance {
-                padding: 6vh 6vw;
-                margin: 4vh 4vw;
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
             }
 
-        }
+            .entrance-section,
+            .webring-section {
+                width: 100%;
+                border: none;
+            }
 
-        .first-webring-container {
-            margin: 2vh;
-            text-align: center;
-            font-family: 'Press Start 2P', monospace;
-            z-index: 10;
-            position: relative;
-            font-size: 0.8vw;
-        }
+            .entrance-section {
+                height: 40vh;
+            }
 
-        .first-menu-link {
-            color: var(--gold);
-            text-decoration: none;
-        }
+            .webring-section {
+                height: 60vh;
+                border-top: 0.3vh solid var(--gold);
+            }
 
-        .frist-menu-link:hover {
-            color: var(--gold-bright);
-        }
+            .webring-container {
+                height: 50vh;
+            }
 
-        .first-webring-title {
-            font-size: 1vw !important;
+            h1 {
+                font-size: clamp(1.5rem, 5vw, 3rem);
+            }
         }
 
         #particles-canvas {
@@ -172,58 +258,125 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            background:transparent;
+            z-index: 0;
+            background: transparent;
             pointer-events: none;
         }
     </style>
 </head>
 <body>
-<canvas id="particles-canvas"></canvas>
-
+    <canvas id="particles-canvas"></canvas>
     <div class="grid-bg"></div>
     <div class="scanlines"></div>
 
+    <div class="main-container">
 
-    <div class="entrance">
-        <h1>S0ICH1R0'S<br>SANCTUM</h1>
-        <a href="https://s0ich1r0.github.io/s0ich1r0s-sanctum/pages/home.html" class="enter-btn"> ENTER </a>
+        <div class="entrance-section">
+            <div class="entrance">
+                <h1>S0ICH1R0'S<br>SANCTUM</h1>
+                <a href="https://s0ich1r0.github.io/s0ich1r0s-sanctum/pages/home.html" class="enter-btn">ENTER</a>
+            </div>
+        </div>
+
+
+        <div class="webring-section">
+            <div class="webring-container">
+                <!-- Hotline Webring -->
+                <div class="webring-item">
+                    <span class="webring-title">HOTLINE ☎ WEBRING</span>
+                    <div class="webring-links">
+                        <a href="https://hotlinewebring.club/s0ich1r0/previous" class="webring-link">&lt;&lt;&lt; PREV</a>
+                        <a href="https://hotlinewebring.club/" class="webring-link" target="_blank">HOME</a>
+                        <a href="https://hotlinewebring.club/s0ich1r0/next" class="webring-link">NEXT &gt;&gt;&gt;</a>
+                    </div>
+                </div>
+
+                <!-- OSRS Webring Navigation Widget -->
+                <div style="text-align:center; margin:3vh 0;">
+                    <div style="background:url('https://oldschool.runescape.wiki/images/Button_brown_big.png?10a20') center center / 100% 100% no-repeat;
+                        padding:2vh 4vw;
+                        display:inline-block;
+                        min-height: 80px;
+                        min-width: 250px;">
+                        <div style="display:flex; justify-content:center; align-items:center; gap:2vw;">
+                            <a href="https://osrs-webring-nav.s0ich1r0s4t0h.workers.dev/s0ich1r0/previous?url=https://s0ich1r0.github.io/s0ich1r0s-sanctum/">
+                                <img src="https://oldschool.runescape.wiki/images/Left_arrow.png?6126b"
+                                    alt="Previous Site"
+                                    style="width:40px; height:40px; image-rendering:pixelated;">
+                            </a>
+                            <a href="https://osrs-webring-nav.s0ich1r0s4t0h.workers.dev/">
+                                <img src="https://oldschool.runescape.wiki/images/Teleport_to_House_icon_%28mobile%29.png?a9d3d"
+                                    alt="Random Site"
+                                    style="width:40px; height:40px; image-rendering:pixelated;">
+                            </a>
+                            <a href="https://osrs-webring-nav.s0ich1r0s4t0h.workers.dev/s0ich1r0/next?url=https://s0ich1r0.github.io/s0ich1r0s-sanctum/">
+                                <img src="https://oldschool.runescape.wiki/images/Right_arrow.png?e8a1f"
+                                    alt="Next Site"
+                                    style="width:40px; height:40px; image-rendering:pixelated;">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    <div class="first-webring-container">
-        <a href="https://hotlinewebring.club/s0ich1r0/previous" class="first-menu-link">&lt;&lt;&lt;</a>
-        <span><a href="https://hotlinewebring.club/" class="first-menu-link first-webring-title" target="_blank">hotline ☎ webring</a></span>
-        <a href="https://hotlinewebring.club/s0ich1r0/next" class="first-menu-link">&gt;&gt;&gt;</a>
-    </div>
+    <script>
+        // Particle system
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-    <!-- OSRS Webring Navigation Widget -->
-<div style="text-align:center; margin:3vh 0;">
-<div style="background:url('https://oldschool.runescape.wiki/images/Button_brown_big.png?10a20') center center / 100% 100% no-repeat;
-    padding:2vh 4vw;
-    display:inline-block; heignt: 3vh: width: 7vw;">
-<div style="display:flex; justify-content:center; align-items:center; gap:4vw;">
-<a href="https://osrs-webring-nav.s0ich1r0s4t0h.workers.dev/s0ich1r0/previous?url=https://s0ich1r0.github.io/s0ich1r0s-sanctum/">
-<img src="https://oldschool.runescape.wiki/images/Left_arrow.png?6126b"
-    alt="Previous Site"
-    style="width:2vw; height:2vw; image-rendering:pixelated;">
-</a>
-<a href="https://osrs-webring-nav.s0ich1r0s4t0h.workers.dev/s0ich1r0/random?url=https://s0ich1r0.github.io/s0ich1r0s-sanctum/"></a>
-<a href="https://osrs-webring-nav.s0ich1r0s4t0h.workers.dev/"><img src="https://oldschool.runescape.wiki/images/Teleport_to_House_icon_%28mobile%29.png?a9d3d"
-    alt="Random Site"
-    style="width:2vw; height:2vw; image-rendering:pixelated;">
-</a>
-<a href="https://osrs-webring-nav.s0ich1r0s4t0h.workers.dev/s0ich1r0/next?url=https://s0ich1r0.github.io/s0ich1r0s-sanctum/">
-<img src="https://oldschool.runescape.wiki/images/Right_arrow.png?e8a1f"
-    alt="Next Site"
-    style="width:2vw; height:2vw; image-rendering:pixelated;">
-</a>
+        const particles = [];
+        const particleCount = 50;
 
-</div>
-</div>
-</div>
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
 
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
 
-    <script src="pages/scripts/script.js"></script>
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
 
+            draw() {
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 </body>
 </html>
