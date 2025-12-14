@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAYE VALENTINE - ULTIMATE SHRINE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="faye.css">
+</head>
+<body>
+<div class="background-void"></div>
+<div id="yt-bg">
+  <iframe
+    id="yt-video"
+    src="https://www.youtube.com/embed/TNrWkwddO5g?autoplay=1&mute=1&loop=1&playlist=TNrWkwddO5g&controls=0&rel=0&playsinline=1"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen
+  ></iframe>
+</div>
+<div class="page-container">
+
+
+<button id="yt-toggle">❚❚ PAUSE</button>
+    <div class="hearts-container" id="hearts"></div>
+    <div class="stars-container" id="stars"></div>
+
+    <div class="container">
+        <header class="site-header">
+            <h1 class="page-titles">★ FAYE VALENTINE ★</h1>
+            <p class="subtitle">SPACE GODDESS</p>
+        </header>
+
+
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/b/b7/Faye_Valentine_Main.webp" alt="Faye">
+                <div class="gallery-caption">ICON</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/2/2d/FrozenWoman.png" alt="Faye">
+                <div class="gallery-caption">FROZEN</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/2/20/Faye_stranded.png" alt="Faye">
+                <div class="gallery-caption">RED TAIL</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/7/7f/Session3.jpg" alt="Faye">
+                <div class="gallery-caption">CAPTURED</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/3/3f/Faye_tied_up.png" alt="Faye">
+                <div class="gallery-caption">BADASS</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/a/ae/9_FayeJetSpike.png" alt="Faye">
+                <div class="gallery-caption">BEBOP CREW</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/0/08/12_Shower.png" alt="Faye">
+                <div class="gallery-caption">QUEEN</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/d/dd/13_Faye2.png" alt="Faye">
+                <div class="gallery-caption">GORGEOUS</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/3/30/Screen_Shot_2013-12-11_at_1.35.35_PM.png" alt="Faye">
+                <div class="gallery-caption">THINKING</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/e/e7/Screen_Shot_2013-12-11_at_12.48.24_PM.png" alt="Faye">
+                <div class="gallery-caption">TANK!</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/2/24/Faye_valentine.jpg" alt="Faye">
+                <div class="gallery-caption">STUNNING</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/7/71/Faye_in_Session_3.jpg" alt="Faye">
+                <div class="gallery-caption">SESSION 3</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/e/e0/Faye_in_Session_10.jpg" alt="Faye">
+                <div class="gallery-caption">SESSION 10</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/1/14/Faye_in_Session_12.jpg" alt="Faye">
+                <div class="gallery-caption">SESSION 12</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/6/6b/Faye_in_Session_15.jpg" alt="Faye">
+                <div class="gallery-caption">MY FUNNY VALENTINE</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://static.wikia.nocookie.net/cowboybebop/images/8/80/Session18.jpg" alt="Faye">
+                <div class="gallery-caption">SPEAK LIKE A CHILD</div>
+            </div>
+        </div>
+
+
+
+        <h2 class="section-title">★★★ QUOTES ★★★</h2>
+
+        <div class="quote-box">
+            "They say humans can't live alone. But you can live pretty well by yourself."
+        </div>
+
+        <div class="quote-box">
+            "You know the first rule of combat? Shoot them before they shoot you."
+        </div>
+
+        <div class="quote-box">
+            "You're the one still tied to the past, Spike."
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay">
+        <div class="close-hint">CLICK TO CLOSE</div>
+        <div class="overlay-content">
+            <img id="overlayImage" class="overlay-image" src="" alt="">
+            <div id="overlayCaption" class="overlay-caption"></div>
+        </div>
+    </div>
+
+    <canvas id="spaceCanvas"></canvas>
+
+    <script src="scripts/faye.js" defer></script>
+
+</div>
+</body>
+</html>
