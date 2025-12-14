@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@400;700&display=swap');
 
+@font-face {
+    font-family: 'Runescape';
+    src: url('runescape.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -8,7 +15,7 @@ body {
     no-repeat
     fixed;
     background-size: cover;
-    font-family: 'Old Standard TT', serif;
+    font-family: 'Runescape', serif;
     color: #ffcc00;
     image-rendering: pixelated;
     height: 100vh;
