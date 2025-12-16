@@ -6,7 +6,9 @@
     font-weight: normal;
     font-style: normal;
 }
-
+* {
+  font-family: 'Runescape', serif;
+}
 body {
     margin: 0;
     padding: 0;
@@ -177,6 +179,7 @@ text-shadow: 0.1vh 0.1vh 0 #000;
 .player-input {
 text-align: center;
 margin-bottom: 2vh;
+font-family: 'Runescape', serif;
 }
 
 #player-name {
@@ -188,6 +191,7 @@ font-size: 2vh;
 text-align: center;
 width: 25vw;
 text-transform: capitalize;
+font-family: 'Runescape', serif;
 }
 
 #load-btn {
