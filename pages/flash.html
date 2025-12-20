@@ -1,11 +1,12 @@
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styles.css" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&family=Bitcount+Single:wght@100..900&family=Press+Start+2P&family=VT323&family=Yellowtail&display=swap" rel="stylesheet">
-
-    <script src="https://unpkg.com/@ruffle-rs/ruffle@0.1.0-nightly.2024.12.8/ruffle.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&family=Bitcount+Single:wght@100..900&family=Press+Start+2P&family=VT323&family=Yellowtail&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
     <style>
         .flash-section { margin: 4rem 0; }
@@ -26,10 +27,6 @@
             gap: 1.5rem;
             transition: transform 0.4s ease;
         }
-        .game-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255,215,0,0.1);
-        }
         .game-card {
             min-width: 35vw;
             max-width: 35vw;
@@ -40,8 +37,12 @@
             background: rgba(0,0,0,0.5);
             cursor: pointer;
             transition: all 0.3s;
+            will-change: transform;
         }
-
+        .game-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255,215,0,0.1);
+        }
         .game-card img {
             width: 100%;
             height: 25vh;
@@ -92,46 +93,40 @@
             justify-content: center;
             transition: all 0.3s ease;
             user-select: none;
+            will-change: transform;
         }
         .carousel-btn:hover {
             background: var(--gold-bright);
             color: #000;
             transform: translateY(-50%) scale(1.1);
         }
-
         .carousel-btn:active {
             transform: translateY(-50%) scale(0.95);
-
         }
-
         .carousel-prev { left: 8px; }
         .carousel-next { right: 8px; }
-
         .carousel-btn:disabled {
             opacity: 0.3;
             cursor: not-allowed;
             pointer-events: none;
         }
-
         .flash-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.48);
-            display: flex;
+            background: #000;
+            display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s;
+            contain: strict;
         }
-
         .flash-overlay.active {
-            opacity: 1;
-            pointer-events: all;
+            display: flex;
         }
-
+        .flash-overlay.active .content {
+            visibility: hidden;
+        }
         #flash-player {
             width: 90vw;
             height: 90vh;
@@ -142,6 +137,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transform: translateZ(0);
+            will-change: contents;
         }
         #flash-player ruffle-player {
             width: 100%;
@@ -164,6 +161,7 @@
             border: none;
             font-size: 1.8rem;
             cursor: pointer;
+            z-index: 10000;
         }
     </style>
 </head>
@@ -174,31 +172,22 @@
         <h1 class="page-titles">Flash Games</h1>
         <div class="content-inner">
             <div class="main-text">
-
                 <br>
                 <div class="intro-section">
-
-                    <p> most pulled from the archive, then put into a github repo so that i could bypass neocites way of loading  swf, and saves me a shit load of space on neocities. This way of doing things allows the ruffle instance to be inside an overlay, all the css for this is built into the page as to not fill the main CSS more than it already is. same with the script.</p>
+                    <p>most pulled from the archive, then put into a github repo so that i could bypass neocites way of loading swf, and saves me a shit load of space on neocities. This way of doing things allows the ruffle instance to be inside an overlay, all the css for this is built into the page as to not fill the main CSS more than it already is. same with the script.</p>
                 </div>
-
                 <br>
                 <p class="section-intro">scroll through, click play, esc or the gold X to quit</p>
-
                 <h2 class="section-intro">ENJOY!</h2>
-
                 <div id="gamesContainer"></div>
-
                 <br>
-                <p class="outro-note">
-                    more get added when i remember they exist
-                </p>
+                <p class="outro-note">more get added when i remember they exist</p>
                 <br>
                 <div class="welcome-banner"><p class="player-title"></p></div>
             </div>
         </div>
     </section>
 </main>
-
 
 <div id="flash-overlay" class="flash-overlay">
     <button class="close-x" onclick="closeFlash()">X</button>
@@ -207,90 +196,82 @@
 </div>
 
 <script src="scripts/script.js"></script>
-<script>const gameCategories = {
+<script>
+const BASE_URL = 'https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/';
+const gameCategories = {
     "Action": [
-        { title: "Binding Of Isaac", description: "Classic Bullet Hell", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/Binding-of-Isaac.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/Binding1.jpg" },
-        { title: "Bowmaster Prelude", description: "2d Bow Shooting Madness", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/bowmaster_prelude.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/bowmaster1.png" },
+        { title: "Binding Of Isaac", description: "Classic Bullet Hell", file: "Binding-of-Isaac.swf", thumbnail: "Binding1.jpg" },
+        { title: "Bowmaster Prelude", description: "2d Bow Shooting Madness", file: "bowmaster_prelude.swf", thumbnail: "bowmaster1.png" }
     ],
     "Racing": [
-        { title: "Drag Racer V3", description: "The ONE and ONLY", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/20.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/dragracerv3_202012_screenshot.jpg" },
-        { title: "Earn 2 Die 2", description: "Survive the Zombie Hordes", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/earn2die2.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/00_coverscreenshot.png" }
+        { title: "Drag Racer V3", description: "The ONE and ONLY", file: "20.swf", thumbnail: "dragracerv3_202012_screenshot.jpg" },
+        { title: "Earn 2 Die 2", description: "Survive the Zombie Hordes", file: "earn2die2.swf", thumbnail: "00_coverscreenshot.png" }
     ],
     "Cooking": [
-        { title: "Twisted Cooking Mama", description: "Wacky cooking chaos", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/twisted_cooking_mama.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/cooking.png" },
-        { title: "McDonald's Videogame", description: "Be the FRANCHISE", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/McDonalds.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/McDonalds.png" }
+        { title: "Twisted Cooking Mama", description: "Wacky cooking chaos", file: "twisted_cooking_mama.swf", thumbnail: "cooking.png" },
+        { title: "McDonald's Videogame", description: "Be the FRANCHISE", file: "McDonalds.swf", thumbnail: "McDonalds.png" }
     ],
     "Puzzle": [
-        { title: "Learn 2 Fly", description: "Help the penguin fly", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/learn2fly.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/learn2fly1.png" },
-        { title: "Super Mario Flash", description: "Classic platforming", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/super-mario-flash.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/mario.png" },
-        { title: "Bloxorz", description: "BRICK MUST REACH HOLE", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/bloxors.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/Bloxorz.jpg" },
-        { title: "Motherload", description: "DIG DIG DIG", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/motherload.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/motherload.jpg" },
+        { title: "Learn 2 Fly", description: "Help the penguin fly", file: "learn2fly.swf", thumbnail: "learn2fly1.png" },
+        { title: "Super Mario Flash", description: "Classic platforming", file: "super-mario-flash.swf", thumbnail: "mario.png" },
+        { title: "Bloxorz", description: "BRICK MUST REACH HOLE", file: "bloxors.swf", thumbnail: "Bloxorz.jpg" },
+        { title: "Motherload", description: "DIG DIG DIG", file: "motherload.swf", thumbnail: "motherload.jpg" }
     ],
     "Strategy": [
-        { title: "Bloons Tower Defense 3", description: "POP all the bloons", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/bloonstd3.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/bloons.png" },
-        { title: "Minecraft Tower Defense", description: "Blocky tower defense", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/MinecraftTowerDefence.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/mc.png" },
-        { title: "Canyon Defence", description: "canyon tower defence", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/canyondefence.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/canyon.jpg" }
+        { title: "Bloons Tower Defense 3", description: "POP all the bloons", file: "bloonstd3.swf", thumbnail: "bloons.png" },
+        { title: "Minecraft Tower Defense", description: "Blocky tower defense", file: "MinecraftTowerDefence.swf", thumbnail: "mc.png" },
+        { title: "Canyon Defence", description: "canyon tower defence", file: "canyondefence.swf", thumbnail: "canyon.jpg" }
     ],
     "Animations": [
-        { title: "Nyan Cat", description: "NYANNYANYANYANYANYANYAN", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/poptartcat.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/nyan.jpg" },
-        { title: "The Ultimate Showdown", description: "Of ULTIMATE DESTINY", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/The_Ultimate_Showdown_of_Ultimate_Destiny.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/ultimate.png" },
-        { title: "Troubled Windows", description: "Windows XP", file: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/Troubled.swf", thumbnail: "https://raw.githubusercontent.com/s0ich1r0/flash-games/main/games/troubled.png" }
+        { title: "Nyan Cat", description: "NYANNYANYANYANYANYANYAN", file: "poptartcat.swf", thumbnail: "nyan.jpg" },
+        { title: "The Ultimate Showdown", description: "Of ULTIMATE DESTINY", file: "The_Ultimate_Showdown_of_Ultimate_Destiny.swf", thumbnail: "ultimate.png" },
+        { title: "Troubled Windows", description: "Windows XP", file: "Troubled.swf", thumbnail: "troubled.png" }
     ]
 };
 
 const gamesContainer = document.getElementById('gamesContainer');
-
-function chunkArray(arr, size) {
-    const chunks = [];
-    for (let i = 0; i < arr.length; i += size) chunks.push(arr.slice(i, i + size));
-    return chunks;
-}
+const carousels = [];
 
 for (const [category, games] of Object.entries(gameCategories)) {
     const section = document.createElement('div');
     section.className = 'flash-section';
 
-    // Category title
     const title = document.createElement('h2');
     title.className = 'flash-cat-title';
     title.textContent = category;
     section.appendChild(title);
 
-    // Carousel
     const carousel = document.createElement('div');
     carousel.className = 'carousel';
     const track = document.createElement('div');
     track.className = 'carousel-track';
 
-    const pages = chunkArray(games, 2);
+    const pages = [];
+    for (let i = 0; i < games.length; i += 2) pages.push(games.slice(i, i + 2));
+
     let pageIndex = 0;
 
-    // Create buttons
     const prev = document.createElement('button');
     prev.type = 'button';
     prev.className = 'carousel-btn carousel-prev';
     prev.innerHTML = '←';
+    prev.disabled = true;
 
     const next = document.createElement('button');
     next.type = 'button';
     next.className = 'carousel-btn carousel-next';
     next.innerHTML = '→';
-
-    // update button states
-    function updateButtons() {
-        prev.disabled = pageIndex === 0;
-        next.disabled = pageIndex === pages.length - 1;
-    }
+    next.disabled = pages.length === 1;
 
     function renderPage() {
-        track.innerHTML = '';
+        const frag = document.createDocumentFragment();
 
         pages[pageIndex].forEach(game => {
             const card = document.createElement('div');
             card.className = 'game-card';
 
             card.innerHTML = `
-                <img src="${game.thumbnail}" alt="${game.title}">
+                <img src="${BASE_URL}${game.thumbnail}" alt="${game.title}" loading="lazy">
                 <div class="game-info">
                     <h3>${game.title}</h3>
                     <p>${game.description}</p>
@@ -298,14 +279,15 @@ for (const [category, games] of Object.entries(gameCategories)) {
                 </div>
             `;
 
-            const btn = card.querySelector('.play-btn');
-            btn.addEventListener('click', () => playFlash(game.file, game.title));
-
-            track.appendChild(card);
+            card.querySelector('.play-btn').onclick = () => playFlash(BASE_URL + game.file, game.title);
+            frag.appendChild(card);
         });
 
-        // update button states after render
-        updateButtons();
+        track.innerHTML = '';
+        track.appendChild(frag);
+
+        prev.disabled = pageIndex === 0;
+        next.disabled = pageIndex === pages.length - 1;
     }
 
     prev.onclick = () => {
@@ -330,11 +312,11 @@ for (const [category, games] of Object.entries(gameCategories)) {
     carousel.appendChild(track);
     carousel.appendChild(next);
     section.appendChild(carousel);
-
     gamesContainer.appendChild(section);
 }
-// Flash player
+
 let currentPlayer = null;
+let ruffleLoaded = false;
 
 window.playFlash = function(file, title) {
     const overlay = document.getElementById('flash-overlay');
@@ -342,13 +324,26 @@ window.playFlash = function(file, title) {
     const titleEl = document.getElementById('current-title');
 
     titleEl.textContent = title;
-    container.innerHTML = '';
-
-    currentPlayer = window.RufflePlayer.newest().createPlayer();
-    container.appendChild(currentPlayer);
-    currentPlayer.load(file);
-
     overlay.classList.add('active');
+
+    if (!ruffleLoaded) {
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/@ruffle-rs/ruffle@0.1.0-nightly.2024.12.8/ruffle.js';
+        script.onload = () => {
+            ruffleLoaded = true;
+            loadGame();
+        };
+        document.head.appendChild(script);
+    } else {
+        loadGame();
+    }
+
+    function loadGame() {
+        container.innerHTML = '';
+        currentPlayer = window.RufflePlayer.newest().createPlayer();
+        container.appendChild(currentPlayer);
+        currentPlayer.load(file);
+    }
 };
 
 window.closeFlash = function() {
@@ -362,8 +357,7 @@ window.closeFlash = function() {
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeFlash();
 });
-
 </script>
 
 </body>
-
+</html>
