@@ -15,8 +15,8 @@
             --text: #d4c5a9;
             --text-dim: #a89378;
 
-            --glass-border: rgba(212, 175, 55, 0.35);  /* matches --gold with transparency */
-            --glass-highlight: rgba(255, 165, 0, 0.65); /* matches --gold-bright with transparency */
+            --glass-border: rgba(212, 175, 55, 0.35);
+            --glass-highlight: rgba(255, 165, 0, 0.65);
 
             --cursor-color: #ffa500;
             --cursor-outline: var(--stone);
