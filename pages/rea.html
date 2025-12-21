@@ -196,45 +196,50 @@ filter: saturate(2) brightness(1.3);
 animation: rainbow 1s infinite;
 cursor: pointer;
 }
+
 .overlay {
-display: none;
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.95);
-z-index: 10000;
-justify-content: center;
-align-items: center;
-cursor: pointer;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
+
 .overlay.active {
-display: flex;
-animation: pulse 1s infinite;
+    display: flex;
+    animation: pulse 1s infinite;
 }
+
 .overlay-content {
-max-width: 90%;
-max-height: 90%;
-position: relative;
-animation: shake 0.3s infinite, pulse 2s infinite;
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    animation: shake 0.3s infinite, pulse 2s infinite;
 }
+
 .overlay-image {
-max-width: 100%;
-max-height: 90vh;
-border: 5px solid var(--blue);
-box-shadow: 0 0 50px var(--blue-bright), 0 0 100px var(--blue);
-animation: rainbow 1s infinite, glow-pulse 2s infinite;
-filter: saturate(2) brightness(1.3);
+    max-width: 100%;
+    max-height: 90vh;
+    border: 5px solid var(--gold);
+    box-shadow: 0 0 50px var(--gold-bright), 0 0 100px var(--gold);
+    animation: rainbow 1s infinite, glow-pulse 2s infinite;
+    filter: saturate(2) brightness(1.3);
 }
+
 .overlay-caption {
-text-align: center;
-color: var(--blue-bright);
-font-size: clamp(12px, 3vh, 20px);
-margin-top: 20px;
-animation: text-glow 1s infinite, bounce 2s infinite;
-text-transform: uppercase;
-letter-spacing: 3px;
+    text-align: center;
+    color: var(--gold-bright);
+    font-size: clamp(12px, 3vh, 20px);
+    margin-top: 20px;
+    animation: text-glow 1s infinite, bounce 2s infinite;
+    text-transform: uppercase;
+    letter-spacing: 3px;
 }
 .close-hint {
 position: absolute;
@@ -486,13 +491,13 @@ allowfullscreen
 </footer>
 </div>
 <div id="overlay" class="overlay">
-<div class="close-hint">CLICK TO CLOSE</div>
-<div class="overlay-content">
-<img id="overlayImage" class="overlay-image" src="" alt="">
-<div id="overlayCaption" class="overlay-caption"></div>
+    <div class="close-hint">CLICK TO CLOSE</div>
+    <div class="overlay-content">
+        <img id="overlayImage" class="overlay-image" src="" alt="">
+        <div id="overlayCaption" class="overlay-caption"></div>
+    </div>
 </div>
-</div>
-<canvas id="spaceCanvas"></canvas>
+
 <script>
 // Create twinkling stars (hydrangea theme)
 const starsContainer = document.getElementById('stars');
@@ -508,33 +513,30 @@ starsContainer.appendChild(star);
 }
 // Animation loop
 function animate() {
-ctx.clearRect(0, 0, canvas.width, canvas.height);
-particles.forEach(particle => {
-particle.update();
-particle.draw();
-});
-connectParticles();
-drawTrail();
-requestAnimationFrame(animate);
-}
-animate();
-// Gallery Image Overlay
-const overlay = document.getElementById('overlay');
-const overlayImage = document.getElementById('overlayImage');
-const overlayCaption = document.getElementById('overlayCaption');
-const galleryItems = document.querySelectorAll('.gallery-item');
-galleryItems.forEach(item => {
-item.addEventListener('click', () => {
-const img = item.querySelector('img');
-const caption = item.querySelector('.gallery-caption');
-overlayImage.src = img.src;
-overlayCaption.textContent = caption.textContent;
-overlay.classList.add('active');
-});
-});
-overlay.addEventListener('click', () => {
-overlay.classList.remove('active');
-});
+
+  requestAnimationFrame(animate);
+  }
+  animate();
+  // Gallery Image Overlay
+  const overlay = document.getElementById('overlay');
+  const overlayImage = document.getElementById('overlayImage');
+  const overlayCaption = document.getElementById('overlayCaption');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+
+  galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
+          const img = item.querySelector('img');
+          const caption = item.querySelector('.gallery-caption');
+
+          overlayImage.src = img.src;
+          overlayCaption.textContent = caption.textContent;
+          overlay.classList.add('active');
+      });
+  });
+
+  overlay.addEventListener('click', () => {
+      overlay.classList.remove('active');
+  });
 </script>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
