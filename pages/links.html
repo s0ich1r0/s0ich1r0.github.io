@@ -1,156 +1,17 @@
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation</title>
     <link rel="stylesheet" href="styles/styles.css" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&family=Bitcount+Single:wght@100..900&family=Press+Start+2P&family=VT323&family=Yellowtail&display=swap" rel="stylesheet">
-
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            font-size: 1vh;
-        }
-
-
-        .topnav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: var(--bg-secondary);
-            padding: 1.5vh 0;
-            text-align: center;
-            z-index: 9999;
-            border-bottom: 0.4vh solid var(--gold);
-            box-shadow: 0 0 2vh var(--gold-bright);
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-
-        .topnav button {
-            background: var(--stone);
-            color: var(--gold-bright);
-            border: 0.4vh solid var(--gold);
-            padding: 2vh 3vw;
-            margin: 0 1.5vw;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 2vh;
-            cursor: pointer;
-            text-shadow: 0 0 1.5vh var(--gold-bright);
-            box-shadow: 0 0 2vh rgba(212, 175, 55, 0.3);
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-
-        .topnav button:hover {
-            background: var(--gold);
-            color: var(--bg-primary);
-            transform: translateY(-0.5vh);
-            box-shadow: 0 0 3vh var(--gold-bright);
-        }
-
-        .topnav a {
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .midnav {
-            position: fixed;
-            top: calc(8vh + 1px);
-            left: 0;
-            width: 100%;
-            background: var(--bg-secondary);
-            padding: 3.5vh 0;
-            text-align: center;
-            z-index: 9998;
-            border-bottom: 0.2vh solid var(--gold);
-            box-shadow: 0 0 1.5vh var(--gold-bright);
-            backdrop-filter: blur(0.4vh);
-            white-space: nowrap;
-            height: 10.5vh;
-            line-height: 3.3vh;
-        }
-
-        .midnav button {
-            background: var(--stone);
-            color: var(--gold-bright);
-            border: 0.3vh solid var(--gold);
-            padding: 1.5vh 3vw;
-            margin: 0 2vw;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.8vh;
-            cursor: pointer;
-            text-shadow: 0 0 1.5vh var(--gold-bright);
-            box-shadow: 0 0 2vh rgba(212, 175, 55, 0.3);
-            transition: all 0.3s;
-            height: 5vh;
-            min-width: 12vw;
-            white-space: nowrap;
-        }
-
-        .midnav button:hover {
-            background: var(--gold);
-            color: var(--bg-primary);
-            transform: translateY(-0.5vh);
-            box-shadow: 0 0 3vh var(--gold-bright);
-        }
-
-        .midnav a {
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        #back-btn::before { content: "← "; }
-        #forward-btn::after { content: " →"; }
-
-        #content-frame {
-            position: fixed;
-            top: 17.68vh;
-            left: 0;
-            width: 100%;
-            height: calc(100vh - 17.68vh);
-            border: none;
-        }
-
-        @media (max-width: 768px) {
-            .topnav button, .midnav button {
-                font-size: 1.5vh;
-                padding: 1.5vh 2vw;
-                min-width: 20vw;
-            }
-            .midnav {
-                padding: 3vh 0;
-                height: 12vh;
-            }
-            #content-frame {
-                top: 19vh;
-                height: calc(100vh - 19vh);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .topnav button, .midnav button {
-                font-size: 1.2vh;
-                padding: 1vh 1.5vw;
-                min-width: 25vw;
-            }
-            .midnav {
-                padding: 2.5vh 0;
-                height: 14vh;
-            }
-            #content-frame {
-                top: 21vh;
-                height: calc(100vh - 21vh);
-            }
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="styles/links.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&family=Bitcount+Single:wght@100..900&family=Press+Start+2P&family=VT323&family=Yellowtail&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&family=Bitcount+Single:wght@100..900&family=Press+Start+2P&family=VT323&family=Yellowtail&display=swap" rel="stylesheet"></noscript>
 </head>
 <body>
-    <script src="scripts/link.js"></script>
     <div class="topnav">
         <a href="#" onclick="loadPage('about.html'); return false;"><button>About</button></a>
         <a href="#" onclick="loadPage('coollinks.html'); return false;"><button>Links</button></a>
@@ -169,10 +30,8 @@
         <a href="#" onclick="openInNewTab(); return false;"><button id="newtab-btn">Open in New Tab</button></a>
         <a href="#" onclick="goForward(); return false;"><button id="forward-btn">Forward</button></a>
     </div>
-
-
     <iframe id="content-frame" src="links-home.html"></iframe>
 
-
-
+    <script src="scripts/link.js"></script>
 </body>
+</html>
