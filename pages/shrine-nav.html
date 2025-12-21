@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>◈ SHRINE NAV ◈</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: radial-gradient(circle at top, #1c2f46 0%, #070b12 60%);
+    --stone: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.05));
+    --gold: #ffd98a;
+    --gold-bright: #9ffcff;
+    --text: #e9f6ff;
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text);
+    font-family: 'Press Start 2P', cursive;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ===== APP ===== */
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* ===== IFRAME VIEWER ===== */
+
+.viewer {
+    flex: 1;
+    border-bottom: 3px solid var(--gold);
+    position: relative;
+    animation: fade-in 1s ease-out;
+}
+
+.viewer iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: black;
+}
+
+/* ===== NAV BAR (SHORTER) ===== */
+
+.nav-bar {
+    height: 11vh;
+    min-height: 92px;
+    background: var(--stone);
+    border-top: 3px solid var(--gold);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+    position: relative;
+    animation: glow 2.5s infinite;
+}
+
+/* floating stars */
+.nav-bar::before {
+    content: "★ ✦ ★ ✦ ★";
+    position: absolute;
+    top: 6px;
+    font-size: 10px;
+    color: var(--gold-bright);
+    opacity: 0.7;
+    animation: marquee 6s linear infinite;
+}
+
+/* ===== BUTTONS ===== */
+
+.nav-btn {
+    background: rgba(0,0,0,0.88);
+    border: 2px solid var(--gold);
+    color: var(--gold-bright);
+    padding: 5px 7px;
+    font-size: 7px;
+    cursor: pointer;
+    text-align: center;
+    min-width: 50px;
+    animation: float 3s ease-in-out infinite;
+    transition: transform 0.2s;
+}
+
+.nav-btn:nth-child(2) { animation-delay: 0.4s; }
+.nav-btn:nth-child(3) { animation-delay: 0.8s; }
+.nav-btn:nth-child(4) { animation-delay: 1.2s; }
+
+.nav-btn:hover {
+    animation: rainbow 1.2s infinite, shake 0.25s infinite;
+    transform: scale(1.25) rotate(-3deg);
+    z-index: 10;
+}
+
+
+/* ===== ANIMS ===== */
+
+@keyframes glow {
+    0%,100% { box-shadow: 0 0 18px var(--gold-bright); }
+    50% { box-shadow: 0 0 50px var(--gold); }
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+}
+
+@keyframes rainbow {
+    from { filter: hue-rotate(0deg) saturate(2); }
+    to { filter: hue-rotate(360deg) saturate(2); }
+}
+
+@keyframes marquee {
+    from { left: -20%; }
+    to { left: 120%; }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 768px) {
+    .nav-bar {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 8px 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="viewer">
+        <iframe id="contentFrame" src="void.html"></iframe>
+    </div>
+
+    <div class="nav-bar">
+        <div class="nav-btn" onclick="loadPage('faye.html')">
+            ★ FAYE ★<br>VALENTINE
+        </div>
+
+        <div class="nav-btn" onclick="loadPage('void.html')">
+            VOID<br>
+        </div>
+
+        <div class="nav-btn" onclick="loadPage('rea.html')">
+            ★ REA ★<br>SANKA
+        </div>
+    </div>
+
+</div>
+
+<script>
+function loadPage(url) {
+    document.getElementById('contentFrame').src = url;
+}
+</script>
+
+</body>
+</html>
