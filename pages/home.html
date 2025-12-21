@@ -32,7 +32,7 @@
 
         .page-container {
             width: 70vw;
-            width: 70%
+            width: 70%;
             max-width: 1200px;
             min-width: 220px;
             height: auto;
@@ -40,6 +40,11 @@
             position: relative;
             z-index: 1;
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .music-caution {
+          font-family: "PRESS START 2P", sans-serif;
+          font-size: 0.4rem;
         }
     </style>
 </head>
@@ -105,6 +110,9 @@
                         <button class="control-btn" id="play-pause-btn">▶</button>
                         <button class="control-btn" id="next-btn">⏭</button>
                     </div>
+                    <p class="music-caution">
+                    (PLAYER IS LAZY LOADED, IT MAY TAKE A SECOND)
+                    </p>
                 </div>
 
                 <hr class="menu-hr">
